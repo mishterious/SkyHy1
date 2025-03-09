@@ -1,0 +1,71 @@
+<!DOCTYPE html> <!-- Setting up most general boostrap and css links; will cascade either to other general layouts or direct templates -->
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>GoSkyHy</title>
+	<!-- Favicons-->
+	<link rel="shortcut icon" href="../../static/images/icons/GSH_Icon.png">
+	<link rel="apple-touch-icon" href="../../static/images/icons/GSH_Icon.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="../../static/images/icons/GSH_Icon.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="../../static/images/icons/GSH_Icon.png">
+	<!-- Web Fonts-->
+	<link href="https://fonts.googleapis.com/css?family=Lora|Montserrat:400,500,600,700|Open+Sans:400,400i,700" rel="stylesheet">
+	<!-- Bootstrap core CSS-->
+	<link href="../../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<!-- Icon Fonts-->
+	<link href="../../static/css/font-awesome.min.css" rel="stylesheet">
+	<link href="../../static/css/themify-icons.css" rel="stylesheet">
+	<link href="../../static/css/et-line.css" rel="stylesheet">
+	<!-- Plugins-->
+	<link href="../../static/css/owl.carousel.css" rel="stylesheet">
+	<link href="../../static/css/magnific-popup.css" rel="stylesheet">
+	<link href="../../static/css/vertical.min.css" rel="stylesheet">
+	<link href="../../static/css/animate.css" rel="stylesheet">
+	<!-- Template core CSS-->
+	<link href="../../static/css/complete.css" rel="stylesheet">
+	<link href="../../static/css/complete-ids.css" rel="stylesheet">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144161390-2"></script>
+	<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-144161390-2');
+	</script>
+
+</head>
+<body>
+	<!-- for datetimepicker -->
+	<link rel="stylesheet" type="text/css" href="../../static/css/jquery.datetimepicker.css"/ >
+	<script src="../../static/js/jquery.js"></script>
+	<script src="../../static/build/jquery.datetimepicker.full.min.js"></script>
+
+	<!-- Preloader-->
+	<div class="page-loader">
+		<div class="cssload-container">
+			<div class="cssload-whirlpool"></div>
+		</div>
+	</div>
+	<!-- Preloader end-->
+
+	{% block header %} {% endblock header %}
+
+	{% block wrapper %} {% endblock wrapper %}
+
+	{% block content %} {% endblock content %}
+
+	<!-- Scripts-->
+	<script src="../../static/js/jquery-2.2.4.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+	<script src="../../static/bootstrap/js/bootstrap.min.js"></script>
+	<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyA0rANX07hh6ASNKdBr4mZH0KZSqbHYc3Q"></script>
+	<script src="../../static/js/plugins.min.js"></script>
+	<script src="../../static/js/custom.min.js"></script>
+	<!-- Color Switcher (Remove these lines)-->
+</body>
+</html>

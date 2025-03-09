@@ -1,0 +1,106 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+
+<!-- Wrapper-->
+<div class="wrapper">
+	<form class="" action="/create_new3" method="post">
+		{% csrf_token %}
+		<!-- Page Header-->
+		<section class="module-page-title">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="pie-chart">
+							<div class="chart" data-percent="27" data-chart-options="{&quot;barColor&quot;:&quot;#72c02c&quot;}"><span class="chart-text"><span data-background-color="#72c02c"><i class="icon-telescope"></i></span></span> <br> <br><br>
+								<h5 class="page-title-heading">{{ user.username }}</h5>
+								<h6>Tell us more</h6>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-9 m-auto">
+						<div class="nav nav-pills nav-fill h6">
+							<li class="nav-item"><a class="nav-link active" href="#pills-1" data-toggle="pill">About You</a></li>
+							<li class="nav-item"><a class="nav-link" href="#pills-2" data-toggle="pill">What You Offer</a></li>
+							<li class="nav-item"><a class="nav-link" href="#pills-3" data-toggle="pill">Where We Go</a></li>
+							<li class="nav-item"><a class="nav-link" href="#pills-4" data-toggle="pill">What You Provide</a></li>
+						</div>
+						<div class="tab-content">
+							<div class="tab-pane fade show active" id="pills-1">
+								<h6>Guests want to know the host</h6>
+								<textarea class="form-control" name="host" placeholder="Example: I'm an singer and jazz musician who makes music with my friends. I grew up reading Harry Potter and waiting for my owl to come. I was born in Australia, grew up in America, who has lived in India, Malaysia, Germany and the United Kingdom…+ More" rows="12" required=""></textarea>
+							</div>
+							<div class="tab-pane fade" id="pills-2">
+								<h6>Describe the experience</h6>
+								<!-- note see bottom -->
+								<textarea class="form-control" name="description" placeholder="Example: On our adventures, we will visit some of the city's most interesting buildings, a walk through the beautiful city streets, and things that only a local would know. We've found Silicon Valley's hidden gems. We're going to stop by a few must-sees in the Valley, hike over to Mission Peak, head over and end the day on a warm sunset on the beach in Santa Cruz…+ More" rows="12" required=""></textarea>
+							</div>
+							<div class="tab-pane fade" id="pills-3">
+								<h6>Tell the area and how we'll get around</h6>
+								<textarea class="form-control" name="distance" placeholder="Example: We will get around through my truck which fits up to 7 people. The Valley is pretty spread out and though we could walk, driving is much better. If you prefer taking your own transporation you're welcome join me on the drive!…+ More" rows="12" required=""></textarea>
+							</div>
+							<div class="tab-pane fade" id="pills-4">
+								<h6>What will you have ready for us</h6>
+								<textarea class="form-control" name="provided" placeholder="Example: I'll bring you a bottle of water and some snacks for resfreshments. You're welcome to bring what you like and we'll have space to fit it in the truck. " rows="12" required=""></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Page Header end-->
+
+
+		<!-- Page Header-->
+		<section style= "padding-top: 50px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<!-- h6 header, see bottom -->
+						<div class="w3-col s4">
+							<!-- label, see bottom -->
+						</div>
+					</div>
+					<div class="col-md-1">
+					</div>
+					<div class="col-md-4">
+						<button class="btn btn-outline btn-lg btn-gray"><span>BACK</span></button>
+						<button class="btn btn-outline btn-lg btn-gray"><span>NEXT</span></button>
+					</div>
+				</div>
+			</div>
+			<hr>
+		</section>
+		<!-- Page Header end-->
+
+		<!-- Footer-->
+		<footer class="footer">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+					<div class="col-md-6">
+						<ul class="social-icons">
+							<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer end-->
+	</form>
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

@@ -1,0 +1,22 @@
+{% autoescape off %}
+Hi {{ user.first_name }} {{ user.last_name }},
+This is a receipt of your purchase #{{ order.id }}. Please keep it safe for future reference and verification.
+
+Order Total
+
+	Total Cost: ${{ total_cost }}
+	Total Items: {{ total_items }} experiences
+
+
+Experiences Purchased
+{% load index %}
+{% for i in indices %}
+{% with exp=exps|index:i %}
+{% with seller=sellers|index:i %}
+{{ exp.title }}
+Hosted By: {{ seller.first_name }} {{ seller.last_name }}
+{{ exp.description }}
+{% endwith %}
+{% endwith %}
+{% endfor %}
+{% endautoescape %}

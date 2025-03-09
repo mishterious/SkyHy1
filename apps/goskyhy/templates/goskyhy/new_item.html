@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login and Registration | Success</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        .i_b {
+            display: inline-block;
+        }
+        .m_l{
+            margin-left: 60%;
+        }
+        a{
+            padding: 0 5px 0 5px;
+        }
+        p{
+            margin: 5px;
+        }
+    </style>
+    <body>
+        <div class>
+            <a href="/dashboard">Dashboard</a>
+            <a href="/wish_list/add" class='m_l'>Home</a>
+            <a href="/logout" class = 'i_b'>Logout</a>
+        </div>
+        <h2 class = 'i_b'>Hey {{user.first_name}} </h2>
+        <form action="/wish_list/add" method = 'post' >
+            {% csrf_token %}
+            <p>Want to make a new Wish List Item? </p>
+            <p><input type="text" name="item"></p>
+            <input type="submit" value="Register">
+        </form>
+        <table>
+            {% for my in items_liked %}
+                <tr>
+                    <td>
+                        <p>{{my.first_name}}</p>
+                    </td>
+                    <td>{{my.user.first_name}}</td>
+                    </tr>
+            {% endfor %}
+        </table>
+
+    </body>
+</html>

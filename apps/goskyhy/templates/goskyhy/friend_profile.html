@@ -1,0 +1,379 @@
+<link href="../../static/css/style.css" rel="stylesheet" type="text/css" />
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+
+
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Profile-->
+	<section class="module" style= "padding-top: 20px; " id="profile">
+		<div class="container">
+			<!-- <h4 style="text-align: center;">Your Profile</h4> -->
+			<!-- <div class="row">
+				<form class="comment-form row" action="/add_story" method="post" enctype="multipart/form-data">
+					{% csrf_token %} -->
+					<!-- <div class="col-md-4">									
+						<input type="text" placeholder="Story Name" name="title">
+						<br>
+						<input class="_58al" type="text" aria-autocomplete="list" aria-controls="js_2xd" aria-expanded="false" data-testid="searchable-text-input" role="combobox" placeholder="Where are you?" name="city" autocomplete="off" autocorrect="off" value="">
+					</div>
+					<div class="col-md-4">
+						<h4></h4><br>
+						<textarea class="form-full" id="form-message" style="text-align: center;" rows="1" cols="5" name="story" placeholder="Add a Story" required="" aria-required="true"></textarea>
+					</div>
+					<div class="col-md-4">
+						<h4></h4><br> -->
+						<!-- input from Mish see bottom -->
+						<!-- Caroline additions 16/06/19 -->
+						<!-- <input accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" type="file" name="my_file" style="outline:none; cursor: inherint;">
+						<button class="btn pull-right submit">Post a Story</button> -->
+					<!-- </div> -->
+				<!-- </form>
+				{% if uploaded_file_url %}
+				<p>
+					File uploaded at: 
+					<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+				</p>
+				{% endif %}
+			</div> -->
+			<h2></h2>
+			<h3 style="visibility: hidden;"></h3>
+			<h1>{{ user.username }}</h1>
+			<div class="row"></div>
+			<h1></h1>
+			<div class="row">
+				<div class="col-md-4">
+					<p>
+						<img style="border-radius: 5px;" src="{{ userprofile.profile_pic.path }}" alt="{{ user_prof.profile_pic.title }}">
+						<!-- ../../static/images/hosts/omar.jpg -->
+					</p>
+				</div>
+				<div class="col-md-4">
+					<!-- <h3>{{ user.username }}</h3> -->
+					<p>{{ userprofile.background }}</p>
+				</div>
+				<div class="col-md-3">
+					<h5>Intro</h5>
+					<div class="progress-item">
+						<!-- <div class="progress-title">Bass at <a href="/">Trippin' Wizards</a></div> -->
+						<div class="progress-title">Works at {{ userprofile.current_job }}</div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">Listens to <a href="/">{{ userprofile.music }}</a></div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">Went to <a href="/">{{ userprofile.uniqueness }}</a></div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<!-- <div class="progress-title">From <a href="/">Melbourne, Australia</a></div> -->
+						<div class="progress-title">From {{ userprofile.og_city.city }}</div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">Currently lives in {{ user_prof.curr_city.city }}</div>
+						<div class="progress"></div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">
+							<!-- list friends in ul/li -->
+							<ul>
+								Friends
+								{% load index %}
+								{% for i in friend_range %}
+								{% if prof_exists|index:i %}
+								<li>
+									<a href="/friend_profile/{{ friend_ids|index:i }}">{{ friends|index:i }}</a>
+								</li>
+								{% else %}
+								<li>
+									{{ friends|index:i }}
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+			<!-- {% if uploaded_file_url %}
+			<p>
+				File uploaded at: 
+				<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+			</p>
+			{% endif %} -->
+		</div>
+		<div class="row">
+			<div class="col-md-4">
+				<p><img style="border-radius: 5px;" src="{{ pic_url }}" alt="{{ pic_name }}"></p>
+			</div>
+		</div>
+	</section>
+	<!-- Profile end-->
+
+
+	<!-- Portfolio-->
+	<section class="module p-b-0" id="portfolio">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="m-title c-align">
+						<h2>About Me</h2>
+						<h6>An eye for detail makes our works excellent</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="filters h6" id="filters">
+						<li><a class="current" href="#" data-filter="*">All</a></li>
+						<li><a href="#" data-filter=".branding">About</a></li>
+						<li><a href="#" data-filter=".design">Friends</a></li>
+						<li><a href="#" data-filter=".photo">Photos</a></li>
+						<li><a href="#" data-filter=".web">Fun</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row row-portfolio" data-columns="4">
+				<div class="grid-sizer"></div>
+				<div class="portfolio-item js-tilt branding photo large">
+					<div class="portfolio-wrapper">
+						<div class="portfolio-img-wrap" data-background="../../static/images/activities/mishs-beach.jpeg">
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Pismo Beach</h5>
+								<h6 class="portfolio-subtitle">Splash Cafe</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/images/activities/beach-sailing/la/beachfood1.png"></div>
+					</div>
+					<div class="portfolio-item js-tilt web design ">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/beach-sailing/la/beachfood.png"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Hilltop</h5>
+								<h6 class="portfolio-subtitle">San Francisco, CA</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/saileboat.png"></div>
+					</div>
+					<div class="portfolio-item js-tilt photo web ">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/beach-sailing/sf/saileboat.png"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Lake Boats</h5>
+								<h6 class="portfolio-subtitle">Lake Tahoe, CA</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/saileboat.png"></div>
+					</div>
+					<div class="portfolio-item js-tilt design branding ">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/travels/kayak.jpg"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Kayaking in Anacortis</h5>
+								<h6 class="portfolio-subtitle">Seattle, WA</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/mountainwalk.png"></div>
+					</div>
+					<div class="portfolio-item js-tilt design photo ">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/travels/mountainwalk.jpg"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">City walk in Granada</h5>
+								<h6 class="portfolio-subtitle">Granada, Spain</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/mountainwalk.png"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Portfolio end-->
+
+
+	<!-- Resume-->
+	<section class="module module-gray" id="resume">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="m-title c-align">
+						<h2>Travels</h2>
+						<h6>Stories and experiences</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="timeline">
+						<li>{{ myposts }}</li>
+						{% for story in mypics %}
+						<li>
+							<div class="timeline-badge"></div>
+							<div class="timeline-panel">											
+								<div class="timeline-preview">
+									{% load subtract %}
+									{% with id=size|subtract:story.id %}
+									{% load index %}
+									{% if pics|index:id != "" %}
+									<img src="{{ pics|index:id }}">
+									{% endif %}
+									{% endwith %}
+								</div>
+								<div class="timeline-body">
+									<h5 class="timeline-title">{{ story.title }}</h5>
+									{% if request.session.id == story.user.id  %}
+									<form action="/remove_story/{{story.id}}">
+										<td><a href="/remove_story/{{story.id}}" class = 'm'>Remove</a></td>
+									</form>
+									{% endif %}
+									<h1>{{ story.id }}</h1>
+									<!-- h6 header see bottom -->
+									<p>{{story.story}} </p>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+						<div class="timeline-top"></div>
+					</ul>
+					<div class="text-center"><a class="btn btn-lg btn-gray" href="#"><span>See more</span></a></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Resume end-->
+
+	<!--Testimonials--> <!-- Going to be Google Maps -->
+	<!-- <section class="module parallax bg-dark bg-dark-30 text-left" data-background="../../static/images/activities/travels/tourism.jpg">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 m-auto">
+					<div class="tms-slides owl-carousel" data-carousel-options="{&quot;autoPlay&quot;: &quot;5000&quot;}">
+						<div class="tms-item">
+							<div class="tms-icons"> -->
+								<!-- h2 icon chat see bottom -->
+							<!-- </div>
+							<div class="tms-content">
+								<blockquote>
+									<p>If you want to know what a man's like, take a good look at how he treats his inferiors, not his equals.</p>
+								</blockquote>
+							</div>
+							<div class="tms-author">
+								<h6>J.K. Rowling</h6>
+							</div>
+						</div>
+						<div class="tms-item">
+							<div class="tms-icons"> -->
+								<!-- h2 icon chat see bottom -->
+							<!-- </div>
+							<div class="tms-content">
+								<blockquote>
+									<p>To be yourself in a world that is constantly trying to make you something else is the greatest accomplishment.</p>
+								</blockquote>
+							</div>
+							<div class="tms-author">
+								<h6>Ralph Waldo Emerson</h6>
+							</div>
+						</div>
+						<div class="tms-item">
+							<div class="tms-icons"> -->
+								<!-- h2 icon chat see bottom -->
+							<!-- </div>
+							<div class="tms-content">
+								<blockquote>
+									<p>Imperfection is beauty, madness is genius and it's better to be absolutely ridiculous than absolutely boring.</p>
+								</blockquote>
+							</div>
+							<div class="tms-author">
+								<h6>Marilyn Monroe</h6>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section> -->
+
+	<section>
+		<div style="text-align: center;">
+			To be Actual Location
+		</div>
+	</section>
+	<!-- Example w/ coordinates also city, country; scale 1000km -->
+	<section>
+		<div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q={{ map_one }}{{ map_two }}{{ map_three }}+()&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div><br />
+	</section>
+	<!-- See later: Caroline map edits 11/07/19 -->
+	<script type="text/javascript">
+		var values = Object.values(data['loc_to_coord']);
+		var index = 0;
+		function replace_map(index) {
+			//var collection_keys = Object.keys(dictionary);
+			//var values = Object.values(dictionary);
+			//for (value in values) {
+				//console.log(value);
+				value = values[index];
+				var map_div = document.getElementById("map").innerHTML;
+				map_div.src = value;//"https://maps.google.com/maps?q=" + dictionary[key][0] + "," + dictionary[key][1] + "&hl=es;z=20&amp;output=embed";
+				index++;
+				setTimeout(replace_map(index), 500);
+
+			//}
+		}
+	</script>
+	<!-- Testimonials end-->
+
+	<!-- Clients-->
+	<!-- clients section see -->
+	<!-- Clients end-->
+
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

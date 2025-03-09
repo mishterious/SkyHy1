@@ -1,0 +1,351 @@
+{% extends "goskyhy/general_layout.html" %}
+{% block header %}
+
+<!-- Header-->
+<header class="header header-center">
+ <div class="container-fluid">
+  <!-- Brand-->
+  <!-- <div class="inner-header"><a class="inner-brand" href="/"><img class="brand-dark" src="../../static/images/logos/logo_transparent_background.png" width="150px" alt=""><img class="brand-light" src="../../static/images/logos/white_logo_transparent_background.png" width="270px" alt=""></div> -->
+  <!-- Navigation-->
+  <div class="inner-navigation collapse">
+   <div class="inner-nav onepage-nav">
+    <ul>
+     <li><a href="index.html#home"><span class="menu-item-span">Home</span></a></li>
+     <li><a href="index.html#profile"><span class="menu-item-span">Profile</span></a></li>
+     <li><a href="index.html#portfolio"><span class="menu-item-span">Work</span></a></li>
+     <li><a href="index.html#services"><span class="menu-item-span">Services</span></a></li>
+     <li><a href="index.html#resume"><span class="menu-item-span">Resume</span></a></li>
+     <li><a href="index.html#blog"><span class="menu-item-span">Blog</span></a></li>
+     <li><a href="index.html#contact"><span class="menu-item-span">Connect</span></a></li>
+     <li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Pages</span></a>
+      <ul class="sub-menu">
+       <li class="menu-item-has-children"><a href="#">Blog</a>
+        <ul class="sub-menu">
+         <li><a href="blog.html">Blog Standard</a></li>
+         <li><a href="blog-masonry.html">Blog Masonry</a></li>
+         <li><a href="blog-single.html">Single Post</a></li>
+       </ul>
+     </li>
+     <li class="menu-item-has-children"><a href="#">Portfolio</a>
+      <ul class="sub-menu">
+       <li><a href="portfolio-single-1.html">Portfolio 1</a></li>
+       <li><a href="portfolio-single-2.html">Portfolio 2</a></li>
+       <li><a href="portfolio-single-3.html">Portfolio 3</a></li>
+       <li><a href="portfolio-single-4.html">Portfolio 4</a></li>
+       <li><a href="portfolio-single-5.html">Portfolio 5</a></li>
+     </ul>
+   </li>
+ </ul>
+</li>
+<li><a href="start.html"><span class="menu-item-span">All Demos</span></a></li>
+</ul>
+</div>
+</div>
+<!-- Mobile menu-->
+<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+</div>
+</header>
+<!-- Header end-->
+{% endblock header %}
+
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+
+ <!-- Page Header-->
+ <section class="module-header parallax bg-dark bg-dark-30" data-background="assets/images/cities/sf-boats.jpg">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-12">
+      <h1 class="h1 m-b-10">San Francisco</h1>
+      <div class="simplified-search-controls">
+        <div class="origin-wrapper" style="direction: ltr; display: inline-block; margin: 10px;">
+          <label for="simplified-search-controls-origin" style="display: block;">From</label>
+          <input type="text" class="origin tt-input" id="simplified-search-controls-origin" value="" data-date="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="San Franscico " dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre;"></pre><span class="tt-dropdown-menu" style="position: absolute; left: 0px; z-index: 100; display: none; right: auto;"><div class="tt-dataset-origin"></div></span>
+        </div>
+        <div class="destination-wrapper" style="direction: ltr; display: inline-block; margin: 10px;">
+          <label for="simplified-search-controls-destination" style="display: block;">To</label>
+          <input type="text" class="destination tt-input" id="simplified-search-controls-destination" value="" data-date="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Everywhere" dir="auto" style="position: relative; vertical-align: top;"><pre aria-hidden="true" style="position: absolute; visibility: hidden; white-space: pre;"></pre><span class="tt-dropdown-menu" style="position: absolute; left: 0px; z-index: 100; display: none; right: auto;"><div class="tt-dataset-destination"></div></span>
+        </div>
+        <div class="depart-date-wrapper" style="direction: ltr; display: inline-block; margin: 10px; ">
+          <label for="simplified-search-controls-depart-date" style="display: block;">Depart</label>
+          <input type="date" class="origin tt-input" id="simplified-search-controls-origin" value="" data-date="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Start here " dir="auto" style="position: relative; vertical-align: top;">
+        </div>
+        <div class="return-date-wrapper" style="direction: ltr; display: inline-block; margin: 10px;">
+          <label for="simplified-search-controls-return-date" style="display: block;">Return</label>
+          <input type="date" class="return-date one-way" id="simplified-search-controls-return-date" value="" data-date="" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" readonly="">
+        </div>
+      </div>
+      <h1 class="h6">The world is alive and it's time to see it</h1>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- Blog-->
+<section class="module">
+  <div class="container">
+   <div class="row">
+    <!-- Content-->
+    <div class="col-lg-8">
+     <div class="row blog-masonry">
+      
+      <div class="col-md-3 post-item">
+        <!-- Post-->
+        <article class="post">
+          <div class="post-preview"><a href="#"><img src="assets/images/cities/seattle-shi-shi-beach.jpg" alt=""></a>
+            <div class="post-category"><a href="#">Shi Shi Beach</a></div>
+          </div>
+          
+          
+        </article>
+        <!-- Post end-->
+      </div>
+      
+      <div class="col-md-9 post-item">
+        <div class="post-preview">
+          <ul>
+            <div class="post-info">
+              <li class="browse-list-result with-image">
+                <a href="/transport/flights/lond/bexi/?adultsv2=1&amp;childrenv2=&amp;cabinclass=economy&amp;rtn=0&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=1902&amp;qp_prevProvider=ins_browse&amp;qp_prevCurrency=USD&amp;priceSourceId=taps-taps&amp;qp_prevPrice=12">
+                  <div class="browse-image-wrapper">
+                    <div class="browse-image hi-res-loaded" style="background-image: url(&quot;https://content.skyscnr.com/4ed8fa8147ebba107bc6f63e6b9ce7d8/GettyImages-467279753.jpg?resize=500px:500px&amp;quality=60&quot;);">
+                    </div>
+                  </div>
+                  <div class="browse-data-entry">
+
+                    <h3>Seattle</h3>
+
+                    <p class="browse-data-directness direct">Non-stop</p>
+
+                    <button class="backpack-button" type="button">
+                      <span><span class="from">from </span>$12</span>
+                      <span class="icon"></span>
+                    </button>
+                  </div>
+                </a>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <!-- Post end-->
+      </div>
+
+
+      <div class="col-md-3 post-item">
+        <!-- Post-->
+        <article class="post">
+          <div class="post-preview"><a href="#"><img src="assets/images/cities/la_beaches.jpeg" alt=""></a>
+            <div class="post-category"><a href="#">Lifestyle</a></div>
+          </div>
+          
+          
+        </article>
+        <!-- Post end-->
+      </div>
+      
+      <div class="col-md-9 post-item">
+        <div class="post-preview">
+          <ul>
+            <div class="post-info">
+              <li class="browse-list-result with-image">
+                <a href="/transport/flights/lond/bexi/?adultsv2=1&amp;childrenv2=&amp;cabinclass=economy&amp;rtn=0&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=1902&amp;qp_prevProvider=ins_browse&amp;qp_prevCurrency=USD&amp;priceSourceId=taps-taps&amp;qp_prevPrice=12">
+                  <div class="browse-image-wrapper">
+                    <div class="browse-image hi-res-loaded" style="background-image: url(&quot;https://content.skyscnr.com/4ed8fa8147ebba107bc6f63e6b9ce7d8/GettyImages-467279753.jpg?resize=500px:500px&amp;quality=60&quot;);">
+                    </div>
+                  </div>
+                  <div class="browse-data-entry">
+                    
+                    <h3>Los Angeles</h3>
+                    
+                    <p class="browse-data-directness direct">Non-stop</p>
+                    
+                    <button class="backpack-button" style="text-align: right;" type="button">
+                      <span><span class="from">from </span>$12</span>
+                      <span class="icon"></span>
+                    </button>
+                  </div>
+                </a>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <!-- Post end-->
+      </div>
+
+      <div class="col-md-3 post-item">
+        <!-- Post-->
+        <article class="post">
+          <div class="post-preview"><a href="#"><img src="assets/images/cities/nashville2.jpeg" alt=""></a>
+            <div class="post-category"><a href="#">Lifestyle</a></div>
+          </div>
+          
+          
+        </article>
+        <!-- Post end-->
+      </div>
+      
+      <div class="col-md-9 post-item">
+        <div class="post-preview">
+          <ul>
+            <div class="post-info">
+              <li class="browse-list-result with-image">
+                <a href="/transport/flights/lond/bexi/?adultsv2=1&amp;childrenv2=&amp;cabinclass=economy&amp;rtn=0&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=1902&amp;qp_prevProvider=ins_browse&amp;qp_prevCurrency=USD&amp;priceSourceId=taps-taps&amp;qp_prevPrice=12">
+                  <div class="browse-image-wrapper">
+                    <div class="browse-image hi-res-loaded" style="background-image: url(&quot;https://content.skyscnr.com/4ed8fa8147ebba107bc6f63e6b9ce7d8/GettyImages-467279753.jpg?resize=500px:500px&amp;quality=60&quot;);">
+                    </div>
+                  </div>
+                  <div class="browse-data-entry">
+                    
+                    <h3>Nashville</h3>
+                    
+                    <p class="browse-data-directness direct">Non-stop</p>
+                    
+                    <button class="backpack-button" type="button">
+                      <span><span class="from">from </span>$12</span>
+                      <span class="icon"></span>
+                    </button>
+                  </div>
+                </a>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <!-- Post end-->
+      </div>
+
+      <div class="col-md-3 post-item">
+        <!-- Post-->
+        <article class="post">
+          <div class="post-preview"><a href="#"><img src="assets/images/blog/1.jpg" alt=""></a>
+            <div class="post-category"><a href="#">Lifestyle</a></div>
+          </div>
+          
+          
+        </article>
+        <!-- Post end-->
+      </div>
+      
+      <div class="col-md-9 post-item">
+        <div class="post-preview">
+          <ul>
+            <div class="post-info">
+              <li class="browse-list-result with-image">
+                <a href="/transport/flights/lond/bexi/?adultsv2=1&amp;childrenv2=&amp;cabinclass=economy&amp;rtn=0&amp;preferdirects=false&amp;outboundaltsenabled=false&amp;inboundaltsenabled=false&amp;oym=1902&amp;qp_prevProvider=ins_browse&amp;qp_prevCurrency=USD&amp;priceSourceId=taps-taps&amp;qp_prevPrice=12">
+                  <div class="browse-image-wrapper">
+                    <div class="browse-image hi-res-loaded" style="background-image: url(&quot;https://content.skyscnr.com/4ed8fa8147ebba107bc6f63e6b9ce7d8/GettyImages-467279753.jpg?resize=500px:500px&amp;quality=60&quot;);">
+                    </div>
+                  </div>
+                  <div class="browse-data-entry">
+
+                    <h3>San Francisco</h3>
+
+                    <p class="browse-data-directness direct">Non-stop</p>
+
+                    <button class="backpack-button" type="button">
+                      <span><span class="from">from </span>$12</span>
+                      <span class="icon"></span>
+                    </button>
+                  </div>
+                </a>
+              </li>
+            </div>
+          </ul>
+        </div>
+        <!-- Post end-->
+      </div>
+    </div>
+  </div>
+  <!-- Content end-->
+
+  <!-- Sidebar-->
+  <div class="col-lg-4">
+   <div class="sidebar">
+    <!-- Search widget-->
+    <aside class="widget widget_search">
+     <form>
+      <input class="form-control" type="search" placeholder="Type search here">
+      <button class="search-button" type="submit"><span class="fa fa-search"></span></button>
+    </form>
+  </aside>
+  <!-- Recent portfolio widget-->
+  <aside class="widget widget_recent_works">
+   <div class="widget-title">
+    <h6>Latest Work</h6>
+  </div>
+  <ul>
+    <li><a href="#"><img src="assets/images/widgets/4.jpg" alt=""></a></li>
+    <li><a href="#"><img src="assets/images/widgets/5.jpg" alt=""></a></li>
+    <li><a href="#"><img src="assets/images/widgets/6.jpg" alt=""></a></li>
+    <li><a href="#"><img src="assets/images/widgets/7.jpg" alt=""></a></li>
+    <li><a href="#"><img src="assets/images/widgets/8.jpg" alt=""></a></li>
+    <li><a href="#"><img src="assets/images/widgets/9.jpg" alt=""></a></li>
+  </ul>
+</aside>
+
+<!-- categories widget -->
+<!-- Recent entries widget-->
+<aside class="widget widget_recent_entries_custom">
+ <div class="widget-title">
+  <h6>Recent Posts</h6>
+</div>
+<ul>
+  <li class="clearfix">
+   <div class="wi"><a href="#"><img src="assets/images/widgets/1.jpg" alt=""></a></div>
+   <div class="wb"><a href="#">Experience the sound of a modern and clean Bluetooth Speaker</a><span class="post-date">May 8, 2016</span></div>
+ </li>
+ <li class="clearfix">
+   <div class="wi"><a href="#"><img src="assets/images/widgets/2.jpg" alt=""></a></div>
+   <div class="wb"><a href="#">Experience the sound of a modern and clean Bluetooth Speaker</a><span class="post-date">May 8, 2016</span></div>
+ </li>
+ <li class="clearfix">
+   <div class="wi"><a href="#"><img src="assets/images/widgets/3.jpg" alt=""></a></div>
+   <div class="wb"><a href="#">Experience the sound of a modern and clean Bluetooth Speaker</a><span class="post-date">May 8, 2016</span></div>
+ </li>
+</ul>
+</aside>
+
+<!-- Twitter widget-->
+<aside class="widget twitter-feed-widget">
+ <div class="widget-title">
+  <h6>Twitter Feed</h6>
+</div>
+<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
+</aside>
+
+<!-- Tags widget-->
+<aside class="widget widget_tag_cloud">
+ <div class="widget-title">
+  <h6>Tags</h6>
+</div>
+<div class="tagcloud"><a href="#">e-commerce</a><a href="#">portfolio</a><a href="#">responsive</a><a href="#">bootstrap</a><a href="#">business</a><a href="#">corporate</a></div>
+</aside>
+</div>
+</div>
+<!-- Sidebar end-->
+</div>
+</div>
+</section>
+<!-- Blog end-->
+
+<!-- Footer-->
+<footer class="footer">
+  <div class="container">
+   <div class="row align-items-center">
+    <div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+    <div class="col-md-6">
+     <ul class="social-icons">
+      <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+      <li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+      <li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+    </ul>
+  </div>
+</div>
+</div>
+</footer>
+<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

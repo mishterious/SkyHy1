@@ -1,0 +1,26 @@
+<!--just Caroline practicing w/ image uploads; temporary file-->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Image Display</title>
+</head>
+<body>
+	<div>
+		<h1>Simple Uploading Image Tester</h1>
+		<div>
+			<form method='post' enctype="multipart/form-data">
+				{% csrf_token %} <!-- what is this? -->
+				<input type="file" name="my_file">
+				<button type="submit">Upload</button>
+			</form>
+
+			{% if uploaded_file_url %}
+			<p>
+				File uploaded at: 
+				<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+			</p>
+			{% endif %}>
+		</div>
+	</div>
+</body>
+</html>

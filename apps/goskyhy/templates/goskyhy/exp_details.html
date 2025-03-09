@@ -1,0 +1,343 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+{% if not_logged_in %}
+{% if seeing_cart %}
+<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+{% endif %}
+<li class="menu-item-has-children"><a href="/signin"><span class="menu-item-span">Sign In</span></a></li>
+{% else %}
+<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endif %}
+{% endblock login %}
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Where page header will go see bottom -->
+
+	<!-- Blog-->
+	<section class="module">
+		<div class="container">
+			<div class="row">
+				<!-- Content-->
+				<div class="col-lg-8">
+					<!-- Post-->
+					<article class="post">
+						<div class="post-header">
+							<h1 class="post-title">{{ exp.title }}</h1>
+							<!-- <h1 class="post-title">Escape the City and Go to the Best Part</h1> -->
+							<ul class="post-meta h6">
+								<!-- <li>{{ exp.nextbooking }}}</li> -->
+								<li>November 18, 2018</li>
+								<li>In {{ exp.city.city }}, {{ exp.city.state }}</li>
+								<!-- <li><a href="#">{{ totalreviews }}} Comments</a></li> -->
+								<li><a href="#">323 Comments</a></li>
+							</ul>
+						</div>
+						<!-- <div class="post-preview"><img src="{{ exp.profile }}" alt=""></div> -->
+						<div class="post-preview">
+							<img src="{{ img.path }}">
+						</div>
+						<div class="post-wrapper">
+							<div class="post-content">
+								<h5>What we're doing</h5>
+								<p>{{ exp.description }}</p>
+								<blockquote>
+									<h6>About me:</h6>
+									<p> {{ exp.host }}</p>
+								</blockquote>
+								<p>{{ exp.distance }}</p>
+								<p>{{ exp.details }}</p>
+								<p>{{ exp.provided }}</p>
+							</div>
+							<div class="post-footer">
+								<div class="post-tags">
+									{% for cat in categories %}
+									<a href="#">{{ cat.category }}</a>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+					</article>
+					<!-- Post end-->
+
+					<!-- Comments area-->
+					<div class="comments-area">
+						<!-- <h5 class="comments-title">{{ totalreviews }} Comments</h5> -->
+						<h5 class="comments-title">3 Comments - Real Num Later</h5>
+						{% if bought %}
+						<form class="comment-form row" action="/post_comment/{{ exp.id }}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+							<div class="comment">
+								<textarea name="comment" id="" cols="90" rows="5"></textarea>
+							</div>
+							<button class="btn btn-sm submit">Post</button>
+						</form>
+						<br><br>
+						{% else %}
+						<div>
+							You may not enter a comment for this experience because you have not yet purchased it.
+						</div>
+						<br><br>
+						{% endif %}
+						<div class="comment-list">
+							<!-- Comment-->
+							<div class="comment">
+								<!-- <div class="comment-author"><img class="avatar" src="{{ u_prof.profile_pic.path }}" alt=""></div> -->
+								<div class="comment-author"><img class="avatar" src="../../static/images/users/black&white.jpeg" alt=""></div>
+								<div class="comment-body">
+									<div class="comment-meta">
+										<!-- <div class="comment-meta-author"><a href="#">{{ my.user.name }}</a></div> -->
+										<div class="comment-meta-author"><a href="#">Sarah Ford</a></div>
+										<div class="comment-meta-date">
+											<a href="#">
+												<!-- <time>{{ my.review.created_at }}</time> -->
+												<time>May 5, 2017 at 4:51 am</time>
+											</a>
+										</div>
+									</div>
+									<div class="comment-content">
+										<!-- <p>{{ my.review }}</p> -->
+										<p> No depending be convinced in unfeeling he. Excellence she unaffected and too sentiments her. Rooms he doors there ye aware in by shall. Education remainder in so cordially.</p>
+									</div>
+									<div class="comment-reply"><a href="#">Reply</a></div>
+								</div>
+								<!-- Subcomment-->
+								<div class="children">
+									<div class="comment">
+										<!-- <div class="comment-author"><img class="avatar" src="{{ each.user.profilepicture }}" alt=""></div> -->
+										<div class="comment-author"><img class="avatar" src="../../static/images/users/blackhair.jpeg" alt=""></div>
+										<div class="comment-body">
+											<div class="comment-meta">
+												<!-- <div class="comment-meta-author"><a href="#">{{ each.user.name }}</a></div> -->
+												<div class="comment-meta-author"><a href="#">Harry Benson</a></div>
+												<div class="comment-meta-date"><a href="#">
+													<!-- <time>{{ each.created_at }}</time></a></div> -->
+													<time>May 5, 2018 at 4:51 am</time></a>
+												</div>
+											</div>
+											<div class="comment-content">
+												<!-- <p>{{ each.response }}</p> -->
+												<p>If you travel to Vietnam and want to meet up, hit us up: https://www.meetup.com/Ho-Chi-Minh-Meet-the-locals/</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% for i in review_range %}
+								{% load index %}
+								{% with review=reviews|index:i %}
+								{% with u_prof=u_profs|index:i %}
+								<div class="comment-author"><img class="avatar" src="{{ u_prof.profile_pic.path }}" alt=""></div>
+								<div class="comment-body">
+									<div class="comment-meta">
+										<div class="comment-meta-author"><a href="#">{{ review.user.username }}</a></div> <!-- link to page -->
+										<div class="comment-meta-date">
+											<a href="#">
+												<time>{{ review.created_at }}</time>
+											</a>
+										</div>
+									</div>
+									<div class="comment-content">
+										<p>{{ review.review }}</p>
+									</div>
+									<div class="comment-reply"><a href="#">Reply</a></div>
+								</div>
+								{% endwith %}
+								{% endwith %}
+								{% for each in my.reply %}
+								<!-- Subcomment-->
+								<div class="children">
+									<div class="comment">
+										<!-- <div class="comment-author"><img class="avatar" src="{{ each.user.profilepicture }}" alt=""></div> -->
+										<div class="comment-author"><img class="avatar" src="../../static/images/users/blackhair.jpeg" alt=""></div>
+										<div class="comment-body">
+											<div class="comment-meta">
+												<!-- <div class="comment-meta-author"><a href="#">{{ each.user.name }}</a></div> -->
+												<div class="comment-meta-author"><a href="#">Harry Benson</a></div>
+												<div class="comment-meta-date"><a href="#">
+													<!-- <time>{{ each.created_at }}</time></a></div> -->
+													<time>May 5, 2018 at 4:51 am</time></a>
+												</div>
+											</div>
+											<div class="comment-content">
+												<!-- <p>{{ each.response }}</p> -->
+												<p>If you travel to Vietnam and want to meet up, hit us up: https://www.meetup.com/Ho-Chi-Minh-Meet-the-locals/</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- Comment-->
+								{% endfor %}
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+					<!-- Comments area end-->
+
+				</div>
+				<!-- Content end-->
+
+				<!-- Sidebar-->
+				<div class="col-lg-4">
+					<div class="sidebar">
+						<!-- Search widget-->
+						<aside class="widget widget_search">
+							<form class="comment-form row" action="/search" method="post">
+								{% csrf_token %}
+								<input class="form-control" type="search" placeholder="Type search here">
+								<button class="search-button" type="submit"><span class="fa fa-search"></span></button>
+							</form>
+						</aside>
+						<!-- Recent portfolio widget-->
+						<aside class="widget widget_recent_entries_custom">
+							<!-- widget_recent_works -->
+							<div class="widget-title">
+								<h6>More Great Experiences</h6>
+							</div>
+							<ul>
+								{% load index %}
+								{% load substring_back %}
+								{% for i in range_diff %}
+								{% with diff_exp=list_exps_diff|index:i %}
+								{% with img=diff_exp_img|index:i %}
+								<li class="clearfix">
+									<div class="wi"><a href="/exp_details/{{ diff_exp.id }}/0"><img src="{{ img.path }}" alt=""></a></div>
+									<div class="wb"><a href="/exp_details/{{ diff_exp.id }}/0">{{ diff_exp.title }}</a><span class="post-date">£{{ diff_exp.price.price|substring_back:"-2" }}</span></div>
+								</li>
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</ul>
+						</aside>
+						<!-- Where categories widgets will go see bottom -->
+
+						<!-- Recent entries widget-->
+						<aside class="widget widget_recent_entries_custom">
+							<div class="widget-title">
+								<h6>Activities Nearby</h6>
+							</div>
+							<ul>
+								<!-- for localexp in xrange(5) %} -->
+								{% load index %}
+								{% load substring_back %}
+								{% for i in range_same %}
+								{% with local_exp=list_exps_same|index:i %}
+								{% with img=same_exp_img|index:i %}
+								<li class="clearfix">
+									<div class="wi"><a href="/exp_details/{{ local_exp.id }}"><img src="{{ img.path }}" alt=""></a></div>
+									<div class="wb"><a href="/exp_details/{{ local_exp.id }}">{{ local_exp.title }}</a><span class="post-date">£{{ local_exp.price.price|substring_back:"-2" }}</span></div>
+								</li>
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</ul>
+						</aside>
+
+						<!-- Date picker - this should be created at the create an expereinces page -->
+						<!-- Available offers should be clear - customers choose a date and then preferred time to lock in -->
+						<div class="container">
+							<div class="col-sm-6" style="height:130px;">
+								<div class="form-group">
+									<div class='input-group date' id='datetimepicker11'>
+										<input type='text' class="form-control" />
+										<span class="input-group-addon">
+											<span class="glyphicon glyphicon-calendar">
+											</span>
+										</span>
+									</div>
+								</div>
+							</div>
+							<script type="text/javascript">
+								$(function () {
+									$('#datetimepicker11').datetimepicker({
+										daysOfWeekDisabled: [0, 6]
+									});
+								});
+							</script>
+						</div>
+						
+						<!-- Purchase Cart-->
+						{% if not_logged_in %}
+						<!-- <p><a class="btn btn-brand" href="/">Please Login Before Purchasing</a></p> -->
+						<!-- try bringing into login/continue as guest page -->
+						<p><a class="btn btn-brand" href="/add_order_guest/{{ exp.id }}/1"><span>Add to Cart</span></a></p>
+						{% else %}
+						<p><a class="btn btn-brand" href="/add_order/{{ exp.id }}/1"><span>Add to Cart</span></a></p>
+						{% endif %}
+
+						<!-- Twitter widget-->
+						<aside class="widget twitter-feed-widget">
+							<div class="widget-title">
+								<h6>Twitter Feed</h6>
+							</div>
+							<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
+						</aside>
+
+						<!-- Tags widget-->
+						<aside class="widget widget_tag_cloud">
+							<div class="widget-title">
+								<h6>Tags</h6>
+							</div>
+							<div class="tagcloud">
+								{% for tag in tags %}
+								<a href="#">{{ tag.hashtag }}</a>
+								{% endfor %}
+							</div>
+						</aside>
+					</div>
+				</div>
+				<!-- Sidebar end-->
+			</div>
+		</div>
+	</section>
+	<!-- Blog end-->
+
+	<!-- Active Map -->
+	<section>
+		<div style="width: 100%">
+			<div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q={{ map_one }}{{ map_two }}{{ map_three }}{{ map_four }}+({{ map_five }})&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div><br />
+		</div>
+		<br />
+	</section>
+
+
+	<!-- Clients and Testimonials-->
+	<!-- Clients and Testimonials end-->
+
+	<!-- Posts-->
+
+	<!-- Posts end -->
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<form class="footer_newsletter">
+				<label class="h4">Subscribe Newsletter</label>
+				<input class="input-lg" type="email" placeholder="Enter Your Email...">
+				<button class="btn btn-lg btn-color" type="submit">Sign Up</button>
+			</form>
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

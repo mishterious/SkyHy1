@@ -1,0 +1,93 @@
+{% extends "goskyhy/general_layout.html" %}
+{% block header %}
+<!-- Header-->
+<header class="header header-center">
+	<div class="container-fluid">
+		<!-- Brand-->
+		<div class="inner-header"><a class="inner-brand" href="/"><img class="brand-dark" src="../../static/images/logo.png" width="30px" alt=""><img class="brand-light" src="../../static/images/logo-light.png" width="30px" alt=""></a></div>
+		<!-- Navigation-->
+		<div class="inner-navigation collapse">
+			<div class="inner-nav onepage-nav">
+				<ul>
+					<!-- Simple-->
+					<!-- <li><a href="#new"><span class="menu-item-span">Adventurers</span></a></li> -->
+					<!-- Simple-->
+					<!-- <li><a href="/hosts"><span class="menu-item-span">SkyPirates</span></a></li> -->
+					<!-- Simple-->
+					<li><a href="/adventures"><span class="menu-item-span">Host Adventures</span></a></li>
+					<!-- Simple-->
+					<li class="menu-item-has-children"><a href="/signin"><span class="menu-item-span">Sign In</span></a>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Mobile menu-->
+		<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+	</div>
+</header>
+<!-- Header end-->
+{% endblock header %}
+
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Page header; see bottom -->
+	<section class="module" id="new">
+		<div class="container-fluid custom-fluid">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="m-title c-align">
+						<h2>What's Happening</h2>
+						<h6>Life is experienctial - let's make the most of it</h6>
+						<form class="comment-form row" action="/search" method="post">
+							{% csrf_token %}
+							<input class="form-control" type="search" placeholder="Type search here">
+							<button class="search-button" type="submit"><span class="fa fa-search"></span></button>
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for my in experiences %}
+				<form class="comment-form row" action="/act_details/{{ exp.id }}" method="post">
+					{% csrf_token %}
+					<div class="col-md-3">
+						<div class="demo-preview">
+							<a href="/">
+								<!-- store main image here -->
+								<img src="../../static/images/activities/travelbuddy_SF.jpeg" style="height: 276px; border-radius: 12px;"> 
+								<h6>{{ exp.category }}</h6>
+								<h4>{{ exp.title }}}</h4>
+								<h5>{{ exp.city.city }}, {{ exp.city.state }}</h5>
+								<h5>{{ exp.totalhours }}} per person</h5>
+								<h6>{{ exp.totalratings }}Reviews: {{ totalreviews }}</h6>   
+							</a>
+						</div>
+					</div>
+				</form>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2017 <a href="#">GoSkyHy</a>, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

@@ -1,0 +1,291 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+<link href="../../static/css/style.css" rel="stylesheet" type="text/css" />
+
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Page header goes here; see bottom -->
+	<!-- Blog-->
+	<section class="module" style= "padding-top: 0px;">
+		<div class="container">
+			<div class="row content-section">
+				<form class="comment-form row" action="/add_story" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="col-md-4" style="vertical-align: text-top; width: 530px;">
+						<input type="text" placeholder="Story Name"  style="width: 320px;" name="title">
+						<br>
+						<input class="_58al" type="text" aria-autocomplete="list" style="width: 320px;" aria-controls="js_2xd" aria-expanded="false" data-testid="searchable-text-input" role="combobox" placeholder="Where are you?" name="city" autocomplete="off" autocorrect="off" value="">
+					</div>
+					<div class="col-md-4" style="vertical-align: text-top; width: 530px">
+						<textarea class="form-full" id="form-message" style="text-align: center; vertical-align: text-top; display: inline-block;" rows="1" cols="5" name="story" placeholder="Add a Story" required="" aria-required="true"></textarea>
+					</div>
+					<div class="col-md-4"style="vertical-align: text-top; width: 530px">
+						<input accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" type="file" name="my_file" style="outline:none; cursor: inherint;">
+						<br><br>
+						<button class="btn pull-right submit float-left" style="text-align: left;">Post a Story</button>
+					</div>
+				</form>
+			</div>
+			<div class="row">
+				<h6>Hey {{ user.username }} check out what the others are doing</h6><br><br>
+				<!-- Content-->
+				<div class="col-lg-8">
+					<div class="row blog-masonry">
+						<!-- going through friends' stories -->
+						{% for i in indices %}
+						{% load index %}
+						{% with friend=friends|index:i %}
+						{% with friend_stories=stories|index:i %}
+						{% with story_imgs=imgs|index:i %}
+						{% with story_indices=num_stories|index:i %}
+						{% for j in story_indices %}
+						{% with story=friend_stories|index:j %}
+						{% with img=story_imgs|index:j %}
+						<div class="col-md-6 post-item">
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="{{ img.path }}" alt=""></a>
+									<div class="post-category"><a href="#">@{{ friend.user.username }}</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">{{ story.title }}</a></h2>
+									</div>
+									<div class="post-content">
+										<p>{{ story.story }}</p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@{{ friend.user.username }}</a> on {{ story.created_at }}</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						{% endwith %}
+						{% endwith %}
+						{% endfor %}
+						{% endwith %}
+						{% endwith %}
+						{% endwith %}
+						{% endwith %}
+						{% endfor %}
+
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/activeicons/northdakota/scandinavian_heritage.jpg" alt=""></a>
+									<div class="post-category"><a href="#">@elonsonit</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">Scandianvian Houses</a></h2>
+									</div>
+									<div class="post-content">
+										<p>A trip through Norwegian heritage with  @jessie12! Who knew the vikings had great architects. It's one the latest stops on my book. #hardlywritting</p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@elonsonit</a> on February 14, 2019</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/travels/niceboat2.jpg" alt=""></a>
+									<div class="post-category" data-background-color="#ffbb44"><a href="#">@shainavicki</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">Boats to Mykonos</a></h2>
+									</div>
+									<div class="post-content">
+										<p>ALWAYS CARRY A DRONE WHEN TRAVELLING Omg we had just a great time in Greece. Who ever make drones available made sure we could take great pics! #lovinit </p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@shainavicki</a> on Januaray 27, 2019</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/travels/sailingroup.jpg" alt=""></a>
+									<div class="post-category" data-background-color="#4CAF50"><a href="#">@mishterious</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">Standard Weekly Boatride</a></h2>
+									</div>
+									<div class="post-content">
+										<p> Good times with @sebastianiocal @staciegiver @berlarusallday and everyone else. I swear the dog is half-dolphin. #winningonthebeach #partyallnight </p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@mishterious</a> on January 11, 2019</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/travels/boats.jpg" alt=""></a>
+									<div class="post-category"><a href="#">@justsul
+
+									</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">New Trends</a></h2>
+									</div>
+									<div class="post-content">
+										<p>What is the day with out the night? The day is cake and the night is icing. @mikebarly was a great host</p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@justsul</a> on January 10, 2019</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/mishs-beach.jpeg" alt=""></a>
+									<div class="post-category" data-background-color="#ffbb44"><a href="#">@mishterious</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">Behind the color</a></h2>
+									</div>
+									<div class="post-content">
+										<p>Up maids me an ample stood given. Certainty say suffering his him collected intention promotion. Hill sold ham men made lose case.</p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@mishterious</a> on February 14, 2017</div>
+							</article>
+							<!-- Post end-->
+						</div>
+						<div class="col-md-6 post-item">
+
+							<!-- Post-->
+							<article class="post">
+								<div class="post-preview"><a href="#"><img src="../../static/images/activities/night_retreats.jpg" alt=""></a>
+									<div class="post-category" data-background-color="#4CAF50"><a href="#">@justinesweb</a></div>
+								</div>
+								<div class="post-wrapper">
+									<div class="post-header">
+										<h2 class="post-title"><a href="blog-single.html">Bicycles</a></h2>
+									</div>
+									<div class="post-content">
+										<p>Started the year right! Parties at night with @dusteasy @rayburn @drewbag @melp12 @joejoejoe @tayquee @dumbosricesauce @pitzenburg </p>
+									</div>
+								</div>
+								<div class="post-info"><a href="#">@justinesweb</a> on January 1, 2019</div>
+							</article>
+							<!-- Post end-->
+						</div>
+					</div>
+				</div>
+				<!-- Content end-->
+
+				<!-- Sidebar-->
+				<div class="col-lg-4">
+					<div class="sidebar">
+						<!-- Search widget-->
+						<aside class="widget widget_search">
+							<form>
+								<input class="form-control" type="search" placeholder="Type search here">
+								<button class="search-button" type="submit"><span class="fa fa-search"></span></button>
+							</form>
+						</aside>
+						<!-- Recent portfolio widget-->
+						<aside class="widget widget_recent_works">
+							<div class="widget-title">
+								<h6>Latest Work</h6>
+							</div>
+							<ul>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/art/draw-side.jpeg" alt=""></a></li>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/travels/tourism.jpg" alt=""></a></li>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/beachyogo_SF.jpeg" alt=""></a></li>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/beach-sailing/la/beachside-ladies.png" alt=""></a></li>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/travels/kayak.jpg" alt=""></a></li>
+								<li style="height: 150px; width: 150px;"><a href="#"><img src="../../static/images/activities/beach-sailing/la/beachfood.png" alt=""></a></li>
+							</ul>
+						</aside>
+						<!-- Categories widget; see bottom -->
+						<!-- Recent entries widget-->
+						<aside class="widget widget_recent_entries_custom">
+							<div class="widget-title">
+								<h6>Recent Posts</h6>
+							</div>
+							<ul>
+								<li class="clearfix">
+									<div class="wi"><a href="#"><img src="../../static/images/hosts/imo.jpg" alt=""></a></div>
+									<div class="wb"><a href="#">Gotta love experiencing the sound of modern music #livelife</a><span class="post-date">May 8, 2019</span></div>
+								</li>
+								<li class="clearfix">
+									<div class="wi"><a href="#"><img src="../../static/images/hosts/shanki.jpg" alt=""></a></div>
+									<div class="wb"><a href="#">Eat heathly, sleep well, wake up and exercise</a><span class="post-date">May 7, 2019</span></div>
+								</li>
+								<li class="clearfix">
+									<div class="wi"><a href="#"><img src="../../static/images/hosts/tina.jpg" alt=""></a></div>
+									<div class="wb"><a href="#">I go where the mountain takes me and this time it's up with @barbie23! </a><span class="post-date">May 7, 2019</span></div>
+								</li>
+							</ul>
+						</aside>
+
+						<!-- Twitter widget-->
+						<aside class="widget twitter-feed-widget">
+							<div class="widget-title">
+								<h6>Twitter Feed</h6>
+							</div>
+							<div class="twitter-feed" data-twitter="345170787868762112" data-number="2"></div>
+						</aside>
+
+						<!-- Tags widget-->
+						<aside class="widget widget_tag_cloud">
+							<div class="widget-title">
+								<h6>Tags</h6>
+							</div>
+							<div class="tagcloud"><a href="#">e-commerce</a><a href="#">portfolio</a><a href="#">responsive</a><a href="#">bootstrap</a><a href="#">business</a><a href="#">corporate</a></div>
+						</aside>
+					</div>
+				</div>
+				<!-- Sidebar end-->
+			</div>
+		</div>
+	</section>
+	<!-- Blog end-->
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

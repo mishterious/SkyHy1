@@ -1,0 +1,117 @@
+{% extends "goskyhy/general_layout.html" %}
+{% block header %}
+<!-- Header-->
+<header class="header header-center">
+	<div class="container-fluid">
+		<!-- Brand-->
+		<div class="inner-header">
+			<a class="inner-brand" href="/">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Logo.png" width="50px" alt="">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Name1.png" width="200px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Logo_White.png" width="70px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Name_White2.png" width="240px" alt="">
+			</a>
+		</div>
+		<!-- Navigation-->
+		<div class="inner-navigation collapse">
+			<div class="inner-nav onepage-nav">
+				<ul>
+					<li><a href="/"><span class="menu-item-span">Home</span></a></li>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- Mobile menu-->
+	<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+</div>
+</header>
+<!-- Header end-->
+{% endblock header %}
+
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+
+	<!-- Page Header-->
+	<section class="module-header parallax bg-dark bg-dark-30" data-background="../../static/images/home/takeoff3.jpeg">
+		<div class="container">
+			<div>
+				<!-- <div class="col-md-1"></div>
+				<div class="col-md-5" style="background-color: black; opacity: 0.7; ">
+					<div class="comment-respond">
+						<h5 class="comment-reply-title">Login to GoSkyHy</h5>
+						{% if messages %}
+						{% for message in messages %}
+						<h6 class="comment-body" style="margin: 0px;">{{ message }}</h6>
+						{% endfor %}   
+						{% endif %}
+						<form class="comment-form row" action="/login" method="post">
+							{% csrf_token %}									
+							<div class="form-group col-sm-8">
+								<h1 class="h5"></h1>
+								<input class="form-control" type="text" name='email' placeholder="Username or Email *">
+							</div>
+							<div class="form-group col-sm-8">
+								<h1 class="h5"></h1>
+								<input class="form-control" type="password" name='password' placeholder="Password *">
+							</div>
+							<div class="form-submit col-sm-12">
+								<button class="btn btn-round btn-brand" type="submit"><span>Login</span></button>
+							</div>
+						</form>
+					</div>
+				</div> -->
+				<div class="col-md-1"></div>
+				<div class="col-md-5" style="background-color: black; opacity: 0.7; ">
+					<div class="comment-respond">
+						<h5 class="comment-reply-title">Guest Information</h5>
+						<form class="comment-form row" action="/add_guest" method="post">
+							{% csrf_token %}
+							<div class="form-group col-sm-6">
+								<input class="form-control" type="text" name='first_name' placeholder="First Name">
+							</div>
+							<div class="form-group col-sm-6">
+								<input class="form-control" type="text" name='last_name' placeholder="Last Name">
+							</div>
+							<div class="form-group col-sm-6">
+								<input class="form-control" type="text" name='email' placeholder="Email">
+							</div>
+							<!-- <div class="form-group col-sm-6">
+								<input class="form-control" type="password" name='password' placeholder="Password *">
+							</div>
+							<div class="form-group col-sm-6">
+								<input class="form-control" type="password" name='password_confirm' placeholder="Confirm Password *">
+							</div> -->
+							<div class="form-submit col-sm-12">
+								<button class="btn btn-round btn-brand" type="submit" value="Continue Purchase"><span>Continue Purchase</span></button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page Header end-->
+	
+	
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

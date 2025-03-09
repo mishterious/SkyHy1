@@ -1,0 +1,202 @@
+{% extends "goskyhy/general_layout.html" %}
+{% block header %}
+<!-- Header-->
+<header class="header header-center">
+	<div class="container-fluid">
+		<!-- Brand-->
+		<div class="inner-header">
+			<a class="inner-brand" href="/">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Logo.png" width="50px" alt="">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Name1.png" width="200px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Logo_White.png" width="70px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Name_White2.png" width="240px" alt="">
+			</a>
+		</div>
+		<!-- Navigation-->
+		<div class="inner-navigation collapse">
+			<div class="inner-nav onepage-nav">
+				<ul>
+					<!-- Simple-->
+					<!-- <li><a href="#new"><span class="menu-item-span">Adventurers</span></a></li> -->
+					<!-- Simple-->
+					<!-- <li><a href="/hosts"><span class="menu-item-span">SkyPirates</span></a></li> -->
+					<!-- Simple-->
+					<li><a href="/adventures"><span class="menu-item-span">Host Adventures</span></a></li>
+					<!-- Simple-->
+					{% if not_logged_in %}
+					{% if seeing_cart %}
+					<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+					{% endif %}
+					<li class="menu-item-has-children"><a href="/signin"><span class="menu-item-span">Sign In</span></a>
+					</li>
+					{% else %}
+					<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+					<li class="menu-item-has-children"><a href="/profile"><span class="menu-item-span">My Profile</span></a></li>
+					<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+					<li class="menu-item-has-children"><a href="/logout"><span class="menu-item-span">Log Out</span></a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+		<!-- Mobile menu-->
+		<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+	</div>
+</header>
+<!-- Header end-->
+{% endblock header %}	
+
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	
+	<!-- Page Header-->
+	<!-- <section class="module-header full-height parallax bg-dark bg-dark-30">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="row">
+						<div class="col-md-4"></div>
+						{% for alert in login_alerts %} -->
+						<!-- <div class="h6 col-md-4 m-b-15 text-center" style="background-color: black; opacity: 0.7; width: 10%; height: 5%;">
+							{{ alert }}
+						</div> -->
+
+						<!-- <div class="alert h6 col-md-4 m-b-15 text-center alert-dismissible fade show" role="alert" style="background-color: black; opacity: 0.7; width: 10%; height: 5%;">
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+							</button>
+							<strong>{{ alert }}</strong>
+						</div>
+						{% endfor %}
+					</div>
+					<br> <br> -->
+					<!-- TEMPORARY -->
+					<!-- <div class="col-md-12" style="background-color: black; opacity: 0.7; ">
+						<div class="comment-respond">
+							<form class="comment-form row" action="/param_to_encoded" method="post">
+								{% csrf_token %}
+								<div class="col-sm-1"></div>									
+								<div class="form-group col-sm-10">
+									<h1 class="h5"></h1>
+									<input class="form-control" style="text-align: center;" type="text" name='search' placeholder="Where would you go and what would you do?">
+								</div>
+								<div class="form-submit col-sm-12">
+									<button class="btn btn-round btn-brand" type="submit"><span>Go Sky Hy</span></button>
+								</div>
+							</form>
+						</div>
+					</div>		
+				</div>
+			</div>
+		</div>
+	</section> -->
+	<!-- Page Header end-->
+	
+	<section class="module" id="new">
+		<div class="container-fluid custom-fluid">
+			<form class="comment-form row" action="/param_to_encoded" method="post">
+				{% csrf_token %}				
+				<div class="form-submit col-sm-4">
+
+				</div>					
+				<div class="form-group col-sm-4">
+					<h1 class="h5"></h1>
+					<input class="form-control" style="text-align: left;" type="text" name='search' placeholder="Where would you go and what would you do?">
+				</div>
+				<div class="form-submit col-sm-2">
+					<button class="btn btn-round btn-brand" type="submit"><span>Go Sky Hy</span></button>
+				</div>
+				<div class="form-submit col-sm-2"></div>
+			</form>
+			<div class="row" id="experiences">
+				{% load index %}
+				<!-- {% load imagefit %} -->
+				{% for i in indices %}
+				{% with exp=experiences|index:i %}
+				{% with img=img_list|index:i %}
+				<div class="col-md-3">
+					{% if bought_check|index:i %}
+					<form class="" action="/exp_details/{{ exp.id }}/1" method="post">
+						{% csrf_token %}
+						<div class="demo-preview">
+							<a href="/exp_details/{{ exp.id }}/1">
+								<!-- store main image here -->
+								<img src="{{ img.path |resize:'320x240' }}" style="height: 276px; border-radius: 12px;">
+								<h6>{{ exp.category.category }}</h6>
+								<h4>{{ exp.title }}</h4>
+								<h5>{{ exp.city.city }}, {{ exp.city.state }}</h5>
+								<h5>{{ exp.price.price }} per person</h5>
+								<h6>{{ exp.reviews }}Reviews: {{ totalreviews }}</h6>  <!-- needs to change, doesn't work --> 
+							</a>
+						</div>
+					</form>
+					{% else %}
+					<form class="" action="/exp_details/{{ exp.id }}/0" method="post">
+						{% csrf_token %}
+						<div class="demo-preview">
+							<a href="/exp_details/{{ exp.id }}/0">
+								<!-- store main image here -->
+								<img src="{{ img.path |resize:'320x240' }}" style="height: 276px; border-radius: 12px;">
+								<h6>{{ exp.category.category }}</h6>
+								<h4>{{ exp.title }}</h4>
+								<h5>{{ exp.city.city }}, {{ exp.city.state }}</h5>
+								{% load substring_back %}
+								<h5>£{{ exp.price.price|substring_back:"-2" }} per person</h5>
+								<h6>{{ exp.reviews }}Reviews: {{ totalreviews }}</h6>  <!-- needs to change, doesn't work --> 
+							</a>
+						</div>
+					</form>
+					{% endif %}
+				</div>
+				{% endwith %}
+				{% endwith %}
+				{% endfor %}
+			</div>
+			<!-- <div class="text-center"><a class="btn btn-lg btn-gray" href="#experiences"><span>See more</span></a></div> -->
+			{% if show_more %}
+			<form action="/{{ id }}" method="post">
+				{% csrf_token %}
+				<div class="text-center">
+					<input type="submit" name="see_more" value="See More" class="btn btn-lg btn-gray">
+				</div>
+			</form>
+			{% else %}
+			<div class="text-center">
+				You've reached the end of the currently available experiences.
+			</div>
+			{% endif %}
+		</div>
+	</section>
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<form class="footer_newsletter row">
+				<div class="col-md-4">
+					<label class="h5">Subscribe Newsletter</label>
+				</div>
+				<div class="col-md-4">
+					<input class="input-lg form-control col-md-6" type="email" placeholder="Enter Your Email...">
+				</div>
+				<div class="col-md-4">
+					<button class="btn btn-color col-md-6" type="submit">Sign Up</button>
+				</div>
+			</form>
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

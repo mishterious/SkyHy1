@@ -1,0 +1,126 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	<form class="" action="/registration_2" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<!-- Page Header-->
+		<section class="module-page-title">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+						<div class="pie-chart">
+							<div class="chart" data-percent="8" data-chart-options="{&quot;barColor&quot;:&quot;#72c02c&quot;}">
+								<span class="chart-text">
+									<span data-background-color="#72c02c">
+										<i class="icon-telescope">
+											<!-- <input accept="video/*, video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" name="image" display="inline" role="button" tabindex="0" data-testid="media-sprout" type="file" style="outline:none; cursor: inherint; background: transparent; " width=10 height=10> -->
+										</i>
+									</span>
+								</span> 
+								<br> <br><br>
+								<h5 class="page-title-heading">{{ user.username}}</h5>
+								<div class="">
+									<figure class="gallery-item">
+										<div class="gallery-icon"><a href="../../static/images/cover.jpeg" title="Title" rel="gallery"><img src="../../static/images/portfolio/s-2.jpeg" alt=""></a></div>
+									</figure>
+									<input accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" type="file" name="my_file" style="outline:none; cursor: inherint;">
+								</div>
+								{% if uploaded_file_url %}
+								<p>
+									File uploaded at: 
+									<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+								</p>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+					<div class="col-md-5">
+						<div class="chart-content">
+							<br>
+							<br><br>
+							<div class="chart-title">
+								<br><br>
+								<h6>Where are do you live?</h6>
+								<small>Fields marked with * are required</small>
+								<input class="form-control" type="text" name="city" placeholder="Enter your city *" required>
+								<input class="form-control" type="text" name="state" placeholder="Enter your state/shire/province, etc...">
+								<input class="form-control" type="text" name="country" placeholder="Enter your country *" required>
+								<input class="form-control" type="text" name="zipcode" placeholder="Enter your zipcode">
+								<br><br>
+								<h6>What do you do?</h6>
+								<input class="form-control" type="text" name="work" placeholder="Your time">
+							</div>
+							<br><br><br>
+							<h6>Tell us more about yourself</h6>
+							<textarea name="background" id="" cols="70" rows="5"></textarea>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="">
+							<figure class="gallery-item">
+								<div class="gallery-icon"><a href="../../static/images/cover.jpeg" title="Title" rel="gallery"><img src="../../static/images/portfolio/s-2.jpeg" alt=""></a></div>
+							</figure>
+							<div class="chart-title">
+								<h6>What do you listen to?</h6>
+								<input class="form-control" type="text" name="music" placeholder="Music, Podcasts, Youtubers etc.">
+								<br><br>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Page Header end-->
+
+		<!-- Page Header-->
+		<section style= "padding-top: 50px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-outline btn-lg btn-gray"><span>BACK</span></button>
+						<button class="btn btn-outline btn-lg btn-gray"><span>SKIP</span></button>
+						<button class="btn btn-outline btn-lg btn-gray"><span>NEXT</span></button>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+			<hr>
+		</section>
+		<!-- Page Header end-->
+
+		<!-- Footer-->
+		<footer class="footer">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6"><span class="copyright">© 2019 <a href="#">GoSkyHy</a>, All Rights Reserved.</span></div>
+					<div class="col-md-6">
+						<ul class="social-icons">
+							<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer end-->
+	</form>
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

@@ -1,0 +1,47 @@
+ {% extends "goskyhy/general_layout.html" %}
+{% block header %}
+<!-- Header-->
+<header class="header header-center">
+	<div class="container-fluid">
+		<!-- Brand-->
+		<div class="inner-header">
+			<a class="inner-brand" href="/">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Logo.png" width="50px" alt="">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Name1.png" width="200px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Logo_White.png" width="70px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Name_White2.png" width="240px" alt="">
+			</a>
+		</div>
+		<!-- Navigation-->
+		<div class="inner-navigation collapse">
+			<div class="inner-nav onepage-nav">
+				<ul>
+					<li><a href="/newsfeed"><span class="menu-item-span">News</span></a></li>
+					<li><a href="/create_new"><span class="menu-item-span">Create an Experience</span></a></li>
+
+					<!-- Add After Booking Flight APIs-->
+					<!-- <li><a href="#portfolio"><span class="menu-item-span">Flights</span></a></li> -->
+
+					<li><a href="/"><span class="menu-item-span">Experiences</span></a></li>
+					<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+					{% block login %} {% endblock login %}
+					<!-- <li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+						<ul class="sub-menu">
+							<li class="menu-item-has-children"><a href="/profile">My Profile</a></li> -->
+							<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+							<!-- <li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+						</ul>
+					</li> -->
+				</ul>
+			</div>
+		</div>
+		<!-- Mobile menu-->
+		<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+	</div>
+</header>
+<!-- Header end-->
+{% endblock header %}
+
+{% block wrapper %} {% endblock wrapper %}
+
+{% block content %} {% endblock content %}

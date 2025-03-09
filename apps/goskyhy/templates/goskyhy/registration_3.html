@@ -1,0 +1,103 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	<form class="" action="/save_reg" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		<!-- Page Header-->
+		<section class="module-page-title">
+			<div class="container">
+				<div class="row">
+						<div class="col-md-3">
+							<div class="pie-chart">
+								<div class="chart" data-percent="65" data-chart-options="{&quot;barColor&quot;:&quot;#72c02c&quot;}">
+									<img style="border-radius: 100px;" src="../../static/images/hosts/omar.jpg" alt="">
+									<!-- Add saved profile cover photo here -->
+									<br> <br><br>
+									<h5 class="page-title-heading">{{ user.username}}</h5>
+								</div>
+							</div>
+						</div>
+					<div class="col-md-5">
+						<div class="chart-content">
+							<br>
+							<br><br>
+							<div class="chart-title">
+								<h6>Where are you from?</h6>
+								<!-- <input class="form-control" type="text" name="og_city" placeholder="Enter the city" > -->
+								<small>Fields marked with * are required</small>
+								<input class="form-control" type="text" name="og_city" placeholder="Enter the city where you're from *" required>
+								<input class="form-control" type="text" name="og_state" placeholder="Enter the state where you're from">
+								<input class="form-control" type="text" name="og_country" placeholder="Enter the country where you're from *" required>
+								<input class="form-control" type="text" name="og_zipcode" placeholder="Enter the zipcode where you're from">
+								<br><br>
+								<h6>Where have you been?</h6>
+								<small class="text-muted">Separate destinations by ; and city-to-country with a comma</small>
+								<!-- Would great to have a map based search but for now just putting in the city name is enough -->
+							</div>
+							<br>
+							<textarea name="triplist" id="" cols="70" rows="5"></textarea>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="">
+							<figure class="gallery-item">
+								<div class="gallery-icon"><a href="../../static/images/cover.jpeg" title="Title" rel="gallery"><img src="../../static/images/portfolio/s-2.jpeg" alt=""></a></div>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Page Header end-->
+
+		<!-- Page Header-->
+		<section style= "padding-top: 50px;">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3">
+					</div>
+					<div class="col-md-6">
+						<button class="btn btn-outline btn-lg btn-gray"><span>BACK</span></button>
+						<button class="btn btn-outline btn-lg btn-gray"><span>Submit</span></button>
+					</div>
+					<div class="col-md-3">
+					</div>
+				</div>
+			</div>
+			<hr>
+		</section>
+		<!-- Page Header end-->
+
+		<!-- Footer-->
+		<footer class="footer">
+			<div class="container">
+				<div class="row align-items-center">
+					<div class="col-md-6"><span class="copyright">© 2019 <a href="#">GoSkyHy</a>, All Rights Reserved.</span></div>
+					<div class="col-md-6">
+						<ul class="social-icons">
+							<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+							<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- Footer end-->
+	</form>
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

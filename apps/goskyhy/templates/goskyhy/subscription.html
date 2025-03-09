@@ -1,0 +1,132 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Page Header-->
+	<section class="module-page-title">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6">
+					<h2 class="page-title-heading">Membership Pricing</h2>
+					<h6 class="page-title-subheading">Your subscription will help you pay for your flights</h6>
+				</div>
+				<div class="col-md-6">
+					<p> </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<hr>
+				</div>
+				<div class="col-md-6">
+					<hr>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Page Header end-->
+
+	<!-- Pricing Tables-->
+	<section class="module">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="pricing-wrapper">
+						<div class="pricing-header">
+							<div class="pricing-icon"><i class="icon-telescope"></i></div>
+							<h6 class="pricing-title">Subscriptions</h6>
+						</div>
+						<div class="pricing-price-box">
+							<h5 class="pricing-price"><span>$</span>0
+							</h5>
+						</div>
+						<div class="pricing-body">
+							<ul class="pricing-features">
+								<li>Social Exposure</li>
+								<li>Best time to fly</li>
+								<li>Connect with groups</li>
+								<li>Free support</li>
+							</ul>
+						</div>
+						<div class="pricing-footer"><a class="btn btn-circle btn-brand" href="/profile"><span>Select Plan</span></a></div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="pricing-wrapper pricing-popular">
+						<div class="pricing-header">
+							<div class="pricing-icon"><i class="icon-circle-compass"></i></div>
+							<h6 class="pricing-title">Travelers</h6>
+						</div>
+						<div class="pricing-price-box">
+							<h5 class="pricing-price"><span>$</span>27
+							</h5>
+						</div>
+						<div class="pricing-body">
+							<ul class="pricing-features">
+								<li>Pay-for-you-flights</li>
+								<li>Discounts on tickets</li>
+								<li>Free Apparel</li>
+								<li>Benefits & Rewards</li>
+							</ul>
+						</div>
+						<div class="pricing-footer"><a class="btn btn-circle btn-brand" href="/profile"><span>Select Plan</span></a></div>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="pricing-wrapper">
+						<div class="pricing-header">
+							<div class="pricing-icon"><i class="icon-strategy"></i></div>
+							<h6 class="pricing-title">Connectors</h6>
+						</div>
+						<div class="pricing-price-box">
+							<h5 class="pricing-price"><span>$</span>49+
+							</h5>
+						</div>
+						<div class="pricing-body">
+							<ul class="pricing-features">
+								<li>Travler Plus</li>
+								<li>International Flights</li>
+								<li>Exclusive Appareal</li>
+								<li>Access to Lounges</li>
+							</ul>
+						</div>
+						<div class="pricing-footer"><a class="btn btn-circle btn-brand" href="/profile"><span>Select Plan</span></a></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Pricing Tables end-->
+
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 <a href="#">GoSkyHy</a>, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

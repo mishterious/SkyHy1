@@ -1,0 +1,478 @@
+<link href="../../static/css/style.css" rel="stylesheet" type="text/css" />
+{% extends "goskyhy/login_layout.html" %}
+{% block login %}
+<li class="menu-item-has-children"><a href="/cart/{{ exp_most_recent }}/{{ num_ordered }}"><span class="menu-item-span">Cart</span></a></li>
+<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+	<ul class="sub-menu">
+		<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+		<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+		<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+		<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+	</ul>
+</li>
+{% endblock login %}
+{% block wrapper %}
+
+
+<!-- Wrapper-->
+<div class="wrapper">
+	<!-- Profile-->
+	<section class="module" style= "padding-top: 20px; padding-bottom: 20px;" id="profile">
+		<div class="container">
+			<h4 style="text-align: center;">Your Profile</h4>
+			<div class="row">
+				<form class="comment-form row" action="/add_story" method="post" enctype="multipart/form-data">
+					{% csrf_token %}
+					<div class="col-md-4" style="vertical-align: text-top; width: 530px;">
+						<input type="text" placeholder="Story Name"  style="width: 320px;" name="title">
+						<br>
+						<input class="_58al" type="text" aria-autocomplete="list" style="width: 320px;" aria-controls="js_2xd" aria-expanded="false" data-testid="searchable-text-input" role="combobox" placeholder="Where are you?" name="city" autocomplete="off" autocorrect="off" value="">
+					</div>
+					<div class="col-md-4" style="vertical-align: text-top; width: 530px">
+						<textarea class="form-full" id="form-message" style="text-align: center; vertical-align: text-top; display: inline-block;" rows="1" cols="5" name="story" placeholder="Add a Story" required="" aria-required="true"></textarea>
+					</div>
+					<div class="col-md-4"style="vertical-align: text-top; width: 530px">
+						<input accept="video/*,  video/x-m4v, video/webm, video/x-ms-wmv, video/x-msvideo, video/3gpp, video/flv, video/x-flv, video/mp4, video/quicktime, video/mpeg, video/ogv, .ts, .mkv, image/*, image/heic, image/heif" type="file" name="my_file" style="outline:none; cursor: inherint;">
+						<br><br>
+						<button class="btn pull-right submit float-left" style="text-align: left;">Post a Story</button>
+					</div>
+				</form>
+				{% if uploaded_file_url %}
+				<p>
+					File uploaded at: 
+					<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+				</p>
+				{% endif %}
+			</div>
+			<div class="row">
+				<div class="col-md-4">
+					<p>
+						<img style="border-radius: 5px;" src="{{ userprofile.profile_pic.path }}" alt="{{ user_prof.profile_pic.title }}">
+					</p>
+				</div>
+				<div class="col-md-4">
+					<h3>{{ user.username }}</h3>
+					<p>{{ userprofile.background }}</p>
+				</div>
+				<div class="col-md-3">
+					<h5>Intro</h5>
+					<div class="progress-item">
+						<!-- <div class="progress-title">Bass at <a href="/">Trippin' Wizards</a></div> -->
+						<div class="progress-title">Work as <a href="#">{{ userprofile.current_job }}</a></div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">Music Preferences <a href="/">{{ userprofile.music }}</a></div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<div class="progress-item">
+						<!-- <div class="progress-title">From <a href="/">Melbourne, Australia</a></div> -->
+						<div class="progress-title">From {{ userprofile.og_city.city }}</div>
+						<div class="progress">
+							<!-- progress bar see bottom -->
+						</div>
+					</div>
+					<!-- <div class="progress-item">
+						<div class="progress-title">Currently lives in {{ user_prof.curr_city.city }}</div>
+						<div class="progress"></div>
+					</div> -->
+					<div class="progress-item">
+						<div class="progress-title">
+							Enter user email: <!-- temp -->
+							<form class="comment-form row" action="/pending_friend_request" method="post" enctype="multipart/form-data" style="height: 5%; padding-left: 5%;">
+								{% csrf_token %}
+								<input type="text" placeholder="Add a Friend" name="friend" style="height: 100%;">
+								<button class="btn btn-sm btn-gray" style="height: 100%;">Send Friend Request</button>
+							</form>
+						</div>
+					</div><br><br>
+					<div class="progress-item">
+						<div class="progress-title">
+							<ul>
+								Friend Requests
+								{% load index %}
+								{% for i in received_range %}
+								{% with u=received_validating|index:i %}
+								{% with validation=received_validator|index:i %}
+								{% if validation.status != True and validation.confirmation != None %}
+								<li>
+									<form class="comment-form" action="/add_friend/{{ u.id }}" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<label>{{ u.username }}</label> <br>
+										<input value="{{ u.username }}" type="radio" name="accept" style="transform: scale(5);"> Accept
+										<input value="{{ u.username }}" type="radio" name="reject" style="transform: scale(5);"> Reject
+										<button class="submit">Submit</button>
+									</form>
+								</li>
+								{% endif %}
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">
+							<ul>
+								Pending Sent
+								{% load index %}
+								{% for i in sent_range %}
+								{% with u=sent_validating|index:i %}
+								{% with validation=sent_validator|index:i %}
+								{% if validation.status != True and validation.confirmation != None %}
+								<li>
+									<!-- <form class="comment-form" action="/add_friend/{{ u.id }}" method="post" enctype="multipart/form-data">
+										{% csrf_token %} -->
+										<label>{{ u.username }}</label> <br>
+										<!-- <input value="{{ u.username }}" type="radio" name="accept" style="transform: scale(5);"> Accept
+										<input value="{{ u.username }}" type="radio" name="reject" style="transform: scale(5);"> Reject
+										<button class="submit">Submit</button> -->
+									<!-- </form> -->
+									<div>
+										{% if validation.status != True and validation.confirmation != None %}
+										Status: pending
+										{% endif %}
+									</div>
+								</li>
+								{% endif %}
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">
+							<!-- list friends in ul/li -->
+							<ul>
+								Friends
+								{% load index %}
+								{% for i in friend_range %}
+								{% if prof_exists|index:i %}
+								<li>
+									<a href="/friend_profile/{{ friend_ids|index:i }}">{{ friends|index:i }}</a>
+								</li>
+								{% else %}
+								<li>
+									{{ friends|index:i }}
+								</li>
+								{% endif %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+					<div class="progress-item">
+						<div class="progress-title">
+							<ul>
+								Past Experiences
+								{% load index %}
+								<!-- {% load imagefit %} -->
+								{% for i in exp_range %}
+								{% with exp=past_exps|index:i %}
+								{% with img=past_exps_imgs|index:i %}
+								<a href="/exp_details/{{ exp.id }}/1">
+									<li class="row">
+										<div class="col-md-4">
+											<img src="{{ img.path }}">
+										</div>
+										<div class="col-md-8">
+											<div>
+												{{ exp.title }}
+											</div>
+											<div>
+												{{ exp.city.city }}, {{ exp.city.country }}
+											</div>
+										</div>
+									</li>
+								</a>
+								<li></li>
+								{% endwith %}
+								{% endwith %}
+								{% endfor %}
+							</ul>
+						</div>
+					</div>
+				</div>
+			</form>
+			{% if uploaded_file_url %}
+			<p>
+				File uploaded at: 
+				<a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a>
+			</p>
+			{% endif %}
+		</div>
+		<!-- <div class="row">
+			<div class="col-md-4">
+				<p><img style="border-radius: 5px;" src="{{ pic_url }}" alt="{{ pic_name }}"></p>
+			</div>
+		</div> -->
+	</section>
+	<!-- Profile end-->
+
+
+	<!-- Portfolio-->
+	<section class="module p-b-0" style= "padding-top: 20px; padding-bottom: 20px;"  id="portfolio">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="m-title c-align">
+						<h2>About Me</h2>
+						<h6>An eye for detail makes our works excellent</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="filters h6" id="filters">
+						<li><a class="current" href="#" data-filter="*">All</a></li>
+						<li><a href="#" data-filter=".about">About</a></li>
+						<li><a href="#" data-filter=".friends">Friends</a></li>
+						<li><a href="#" data-filter=".photos">Photos</a></li>
+						<li><a href="#" data-filter=".past_exps">Past Experiences</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div class="row row-portfolio" data-columns="4">
+				<div class="grid-sizer"></div>
+				<!-- big picture - how does it show up like that??? -->
+				<div class="portfolio-item js-tilt about friends photos past_exps large">
+					<!-- <div class="portfolio-wrapper">
+						<div class="portfolio-img-wrap" data-background="../../static/images/activities/mishs-beach.jpeg">
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Pismo Beach</h5>
+								<h6 class="portfolio-subtitle">Splash Cafe</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/images/activities/beach-sailing/la/beachfood1.png"></div>
+					</div> -->
+					<div class="portfolio-wrapper">
+						<div class="portfolio-img-wrap" data-background="{{ pic_url }}">
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">{{ user.username }}</h5>
+								<h6 class="portfolio-subtitle">From {{ userprofile.og_city.city }}</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="{{ pic_url }}"></div> <!-- old prof pictures here or featured??? -->
+					</div>
+					<!-- about need to figure out -->
+					<div class="portfolio-item js-tilt about">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/beach-sailing/la/beachfood.png"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">About</h5>
+								<h6 class="portfolio-subtitle">San Francisco, CA</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/saileboat.png"></div>
+					</div>
+					<!-- friends -->
+					{% load index %}
+					{% for i in friend_range %}
+					{% if prof_exists|index:i %}
+					{% with profile=friend_profiles|index:i %}
+					{% with prof_url=profile.profile_pic.path %}
+					<div class="portfolio-item js-tilt friends">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="{{ prof_url }}"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title" style="color: white;"><a href="/friend_profile/{{ friend_ids|index:i }}">Real Name</a></h5>
+								<h6 class="portfolio-subtitle">{{ friends|index:i }}</h6>
+							</div>
+						</div>
+						<!-- <div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/saileboat.png"></div> -->
+					</div>
+					{% endwith %}
+					{% endwith %}
+					{% else %}
+					<div class="portfolio-item js-tilt friends">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/beach-sailing/sf/saileboat.png"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">Real Name</h5>
+								<h6 class="portfolio-subtitle">{{ friends|index:i }}</h6>
+							</div>
+						</div>
+						<!-- <div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/saileboat.png"></div> -->
+					</div>
+					{% endif %}
+					{% endfor %}
+					<!-- photos -->
+					<div class="portfolio-item js-tilt photos">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="../../static/images/activities/travels/kayak.jpg"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title">
+									<a href="/">Kayaking in Anacortis</a>
+								</h5>
+								<h6 class="portfolio-subtitle">Seattle, WA</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="../../static/activities/beach-sailing/sf/mountainwalk.png"></div>
+					</div>
+					<!-- past experiences -->
+					{% load index %}
+					<!-- {% load imagefit %} -->
+					{% for i in exp_range %}
+					{% with exp=past_exps|index:i %}
+					{% with img=past_exps_imgs|index:i %}
+					<div class="portfolio-item js-tilt past_exps">
+						<div class="portfolio-wrapper">
+							<div class="portfolio-img-wrap" data-background="{{ img.path }}"></div>
+							<div class="portfolio-overlay"></div>
+							<div class="portfolio-caption">
+								<h5 class="portfolio-title" style="color: white;">
+									<a href="/exp_details/{{ exp.id }}">{{ exp.id }}</a>
+								</h5>
+								<h6 class="portfolio-subtitle">
+									<a href="#">{{ exp.city.city }}, {{ exp.city.country }}</a>
+								</h6>
+							</div>
+						</div>
+						<div class="portfolio-link photo" href="{{ img.path }}"></div>
+					</div>
+					{% endwith %}
+					{% endwith %}
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Portfolio end-->
+
+
+	<!-- Resume-->
+	<section class="module module-gray" id="resume">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="m-title c-align">
+						<h2>Travels</h2>
+						<h6>Stories and experiences</h6>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<ul class="timeline">
+						{% for story in stories %}
+						<li>
+							<div class="timeline-badge"></div>
+							<div class="timeline-panel">
+								{% if request.session.id == story.user.id  %}
+								<form action="/remove_story/{{story.id}}" style="text-align: right; padding: 5px 5px 0px 0px; margin-bottom: 5px;">
+									<td><a href="/remove_story/{{story.id}}" class = 'm'><span style="font-weight: normal; color: black;">Remove</span></a></td> 
+								</form>
+								{% endif %}											
+								<div class="timeline-preview">
+									{% load subtract %}
+									{% with id=size|subtract:story.id %}
+									{% load index %}
+									{% if pics|index:id != "" %}
+									<img src="{{ pics|index:id }}">
+									{% endif %}
+									{% endwith %}
+								</div>
+								<div class="timeline-body">
+									<h5 class="timeline-title" style="padding-right: 0px; display: inline-block;">{{ story.title }}</h5>
+									<p>{{story.story}} </p>
+								</div>
+							</div>
+						</li>
+						{% endfor %}
+						<!-- <li>
+							<div class="timeline-badge"></div>
+							<div class="timeline-panel">
+								<div class="timeline-preview"><img src="../../static/images/activities/travels/boats.jpg " style="width: 505px; height: 650px;"alt=""></div>
+								<div class="timeline-body">
+									<h5 class="timeline-title">Boat Rides in Verona</h5>
+									<h6 class="timeline-description">Verona, Italy | June 2018</h6>
+									<p>3 years ago, in a beautiful lake in the middle of Italy, the idea for a new start up blasted off and lauched the new beginning for a new company Had an incredible time on the gondola with @hydenmarks. We went to see the waters and took a nice dip in the lake. Met a few other fun travelers on the road and met after for drinks. </p>
+								</div>
+							</div>
+						</li> -->
+						<li>
+							<div class="timeline-badge"></div>
+							<div class="timeline-panel">
+								<div class="timeline-preview"><img src="../../static/images/activities/travels/lakeshasta.jpg" alt=""></div>
+								<div class="timeline-body">
+									<h5 class="timeline-title">Sample Story - Title</h5>
+									<h6 class="timeline-description">GoSkyHy | 2018 - now - Subtitle</h6>
+									<p>This is the format in which stories you post will appear. You will not be able to see secret or private stories that you friends have posted nor will you be able to remove them but you may set the privacy settings of your own as well as remove them. @tags are for tagging people and account names and #hashtags are formatted as so and are for identifying other notable items (e.g. locations, experiences, feelings, etc...) </p>
+								</div>
+							</div>
+						</li>
+						<div class="timeline-top"></div>
+					</ul>
+					<div class="text-center"><a class="btn btn-lg btn-gray" href="#"><span>See more</span></a></div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Resume end-->
+
+	<!--Testimonials--> <!-- Going to be Google Maps -->
+
+	<!-- Example w/ coordinates also city, country; scale 1000km -->
+	<section>
+		<!-- <div style="width: 100%"><iframe src="https://maps.google.com/maps?width=100%&height=600&hl=en&coord=48.2082, 16.3738&q=Vienna%2C%20Austria+(Your%20Business%20Name)&ie=UTF8&t=&z=3&iwloc=B&output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" style="width: 100%; height: 40%;"><a href="https://www.mapsdirections.info/en/journey-planner.htm">Map Directions</a></iframe></div><br /> -->
+
+		<div style="width: 100%"><iframe width="100%" height="600" src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q={{ map_one }}{{ map_two }}{{ map_three }}+()&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed" frameborder="0" scrolling="no" marginheight="0" marginwidth="0"><a href="https://www.maps.ie/map-my-route/">Draw map route</a></iframe></div><br />
+	</section>
+	<!-- See later: Caroline map edits 11/07/19 -->
+	<script type="text/javascript">
+		var values = Object.values(data['loc_to_coord']);
+		var index = 0;
+		function replace_map(index) {
+			//var collection_keys = Object.keys(dictionary);
+			//var values = Object.values(dictionary);
+			//for (value in values) {
+				//console.log(value);
+				value = values[index];
+				var map_div = document.getElementById("map").innerHTML;
+				map_div.src = value;//"https://maps.google.com/maps?q=" + dictionary[key][0] + "," + dictionary[key][1] + "&hl=es;z=20&amp;output=embed";
+				index++;
+				setTimeout(replace_map(index), 500);
+
+			//}
+		}
+	</script>
+	<!-- Testimonials end-->
+
+	<!-- Clients-->
+	<!-- clients section see -->
+	<!-- Clients end-->
+
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}

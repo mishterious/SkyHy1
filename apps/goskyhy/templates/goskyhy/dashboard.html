@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Login and Registration | Success</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+    </head>
+    <style>
+        .i_b {
+            display: inline-block;
+        }
+        .m_l{
+            margin-left: 60%;
+        }
+        table, td, th {
+            border: 1px solid black;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        td {
+            height: 50px;
+            vertical-align: bottom;
+        }
+        a{
+            padding: 0 5px 0 5px;
+        }
+        p{
+            margin: 5px;
+        }
+    </style>
+    <body>
+        <div class> 
+            <a href="/books" class='m_l'>Home</a>
+            <a href="/logout" class = 'i_b'>Logout</a>
+        </div>
+        <h2 class = 'i_b'>Hey {{user.first_name}} </h2>
+        {{ wish }}
+        <h4>Your Wish List</h4>
+        <table>
+                <tr>
+                  <th>Item</th>
+                  <th>Added By</th>
+                  <th>{{user.first_name}} Added</th>
+                  <th>{{ wish.item}}</th>
+                </tr>
+                {% for my in mywishes %}
+                    <tr>
+                        <td>
+                            <form action="/new_item">
+                                <a href="/new_item/{{my.id}}">{{my.item}}</a>
+                            </form>
+                        </td>
+                        <td>{{my.user.first_name}}</td>
+                        <td>{{my.created_at}}</td>
+                        {% if request.session.id == my.user.id  %}
+                            <td><a href="/delete/{{my.id}}" class = 'm'>Delete this Review</a></td>
+                        {% else %}
+                            <td><a href="/remove_from_list/{{my.id}}">Remove from my list</a></td>
+                        {% endif %}
+                      </tr>
+                    <tr><p></p></tr>
+                {% endfor %}
+        </table>
+        <br><br><br>
+            <table>
+                <tr>
+                    <th>Item</th>
+                    <th>Added By</th>
+                    <th>Date Added</th>
+                    <th>Action</th>
+                </tr>
+                {% for my in mylist %}
+                    <tr>
+                        <td>{{my.item}}</td>
+                        <td>{{my.user.first_name}}</td>
+                        <td>{{my.created_at}}</td>
+                        {% if request.session.id == my.user.id  %}
+                            <form action="/delete/{{my.id}}">
+                                <td><a href="/delete/{{my.id}}" class = 'm'>Delete this Review</a></td>
+                            </form>
+                        {% else %}
+                            <form action="/add_to_wishlist/{{my.id}}">
+                                <td><a href="/add_to_wishlist/{{my.id}}">Add to my Wishlist</a></td>
+                            </form>
+                        {% endif %}
+                      </tr>
+                    <tr><p></p></tr>
+                {% endfor %}
+            </table>
+        <a href="/make_wish" class='m_l'>Add a new List</a>
+    </body>
+</html>

@@ -1,0 +1,226 @@
+{% extends "goskyhy/login_layout.html" %}
+{% block header %}
+
+
+<!-- Header-->
+<header class="header header-center">
+	<link href="../../static/css/style.css" rel="stylesheet">
+	<div class="container-fluid">
+		<!-- Brand-->
+		<div class="inner-header">
+			<a class="inner-brand" href="/">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Logo.png" width="50px" alt="">
+				<img class="brand-dark" src="../../static/images/logos/GSH_Name1.png" width="200px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Logo_White.png" width="70px" alt="">
+				<img class="brand-light" src="../../static/images/logos/GSH Name_White2.png" width="240px" alt="">
+			</a>
+		</div>
+		<!-- Navigation-->
+		<div class="inner-navigation collapse">
+			<div class="inner-nav onepage-nav">
+				<ul>
+					<li><a href="/newsfeed"><span class="menu-item-span">News</span></a></li>
+					<li><a href="/create_new"><span class="menu-item-span">Create an Experience</span></a></li>
+					
+					<!-- Add After Booking Flight APIs-->
+					<!-- <li><a href="#portfolio"><span class="menu-item-span">Flights</span></a></li> -->
+					
+					<li><a href="/"><span class="menu-item-span">Experiences</span></a></li>
+					<li class="menu-item-has-children"><a href="#"><span class="menu-item-span">Settings</span></a>
+						<ul class="sub-menu">
+							<li><a href="/faq"><span class="menu-item-span">FAQ</span></a></li>
+							<li class="menu-item-has-children"><a href="/profile">My Profile</a></li>
+							<!-- <li class="menu-item-has-children"><a href="#">Account</a></li> -->
+							<li class="menu-item-has-children"><a href="/logout">Log Out</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<!-- Mobile menu-->
+		<div class="nav-toggle"><a href="#" data-toggle="collapse" data-target=".inner-navigation"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></a></div>
+	</div>
+</header>
+<!-- Header end-->
+{% endblock header %}
+
+{% block wrapper %}
+<!-- Wrapper-->
+<div class="wrapper">
+	
+	<!-- Checkout Section -->
+	<section class="ptb ptb-sm-80">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<table class="table checkout table-border">
+						<tr class="gray-bg">
+							<!-- <th class="hidden-xs"></th> -->
+							<th>Experiences</th>
+							<th class="hidden-xs">Price</th>
+							<th>Quantity</th>
+							<th>Total</th>
+							<th></th>
+						</tr>
+						{% if num_items > 0 %}
+						{% load index %}
+						{% for i in range %}
+						{% with exp=exp_list|index:i %}
+							<tr>
+								<form id="updated" action="/update_num_ordered/{{ exp.id }}/{{ i }}" method="post" enctype="multipart/form-data">
+									{% csrf_token %}
+										{% with img=img_list|index:i %}
+										<!-- <td class="hidden-xs">
+											<a href="">
+												<img src="{{ img.path }}" />
+											</a>
+										</td> -->
+										<td>
+											<h6><a href="#">{{ exp.title }}</a></h6>
+											<p class="mt-0">
+												<small>Hours : {{ exp.hours }}</small>
+												<small>Date : **Add date of use** {{ exp.date }}</small>
+												<small>Hosted by : @{{ exp.user.username }}</small>
+											</p>
+										</td>
+										{% load substring_back %}
+										<td class="hidden-xs">£{{ exp.price.price|substring_back:"-2" }}</td>
+										<td>
+											<input name="quantity" type="number" value="{{ num_per_exp|index:i }}" max="50" min="1" style="width: 100%; max-width: 70px;" class="input-md">
+											<button class="btn btn-md float-left float-none-sm submit">Update</button>
+										</td>
+										{% load multiply %}
+										{% with price=exp.price.price|substring_back:"-2" %}
+										{% with num_ordered=num_per_exp|index:i %}
+										<td>Total for Experience: £{{ price|multiply:num_ordered }}</td>
+										{% endwith %}
+										{% endwith %}
+										{% endwith %}
+								</form>
+								<td>
+									<form action="/remove_order/{{ exp.id }}" method="post" enctype="multipart/form-data">
+										{% csrf_token %}
+										<button class="btn-black btn-md btn float-right float-none-sm">X</button>
+									</form>
+								</td>
+							</tr>
+						{% endwith %}
+						{% endfor %}
+						{% else %}
+						<h4 class="header-center">Your Cart Is Empty</h4>
+						<br><br><br>
+						{% endif %}
+					</table>
+				</div>
+			</div>
+			<div class="row ptb-30">
+				<div class="col-md-4">
+					<form>
+						<input type="text" placeholder="Coupon code" value="" id="coupon_code" class="input-sm" name="coupon_code" />
+						<input type="submit" value="Apply" name="apply_coupon" class="btn btn-md btn-black">
+					</form>
+				</div>
+				<div class="col-md-4">
+					<form action="/">
+						<button class="btn-black btn-md btn float-right float-none-sm">Continue Shopping</button>
+					</form>
+				</div>
+				<div class="col-md-4">
+					{% if num_items > 0 %}
+					{% load index %}
+					{% with last=range|index:"-1" %}
+					{% with exp=exp_list|index:last %}
+					<form action="/buy_orders/{{ session_id }}/{{ exp.id }}/{{ num_per_exp|index:last }}" method="post" enctype="multipart/form-data">
+						{% csrf_token %}
+						<button class="btn btn-md btn-black float-right float-none-sm">Update Cart</button>
+					</form>
+					{% endwith %}
+					{% endwith %}
+					{% else %}
+					<h6>Empty Cart</h6>
+					{% endif %}
+				</div>
+			</div>
+			<hr />
+			<div class="row ptb-60">
+				<div class="col-md-8 mb-sm-60">
+					<!-- Deciding if this should be all the way on the left, or if the shipping page is on the next page -->
+					<!-- <h4>Calculate Shipping</h4>
+					<form class="">
+						<select class="form-full">
+							<option>United Kingdom</option>
+							<option>france</option>
+							<option>USA</option>
+						</select>
+						<input type="text" class="input-sm form-full" placeholder="State" />
+						<input type="text" class="input-sm form-full" placeholder="Postcode / Zip" />
+						<button class="btn btn-md btn-black" value="1" name="calc_shipping" type="submit">Get A Quote</button>
+					</form> -->
+				</div>
+				<div class="col-md-4 offset-md-4">
+					<div class="shop-Cart-totalbox">
+						<h4>Cart Totals</h4>
+						<table class="table table-border">
+							{% load multiply %}
+							{% load divide %}
+							{% with shipping=total_cost|multiply:"0.1" %}
+							<tr>
+								<th>Total Items :</th>
+								<td>{{ total_items }}</td>
+
+							</tr>
+							<tr>
+								<th>Cart Subtotal :</th>
+								<td>£{{ total_cost }}</td>
+
+							</tr>
+							<tr>
+								<th>Shipping Total :</th>
+								<td>£{{ shipping }}; NOTE: adjustable later</td>
+							</tr>
+							<tr class="shop-Cart-totalprice">
+								<th>Total :</th>
+								<!-- Total needs to grab amounts*quantified added to orders -->
+								<td>£{{ total_cost|add:shipping }}</td>
+							</tr>
+							{% endwith %}
+						</table>
+						{% if logged_in %}
+						{% if allowed_checkout %}
+						<form action="/checkout" method="post" enctype="multipart/form-data">
+							{% csrf_token %}
+							<button value="" type="submit" class="btn btn-lg btn-color-b form-full">
+								Proceed to Checkout
+								<i class="fa fa-chevron-right right"></i>
+							</button>
+						</form>
+						{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- End Checkout Section -->
+
+	<!-- Footer-->
+	<footer class="footer">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-md-6"><span class="copyright">© 2019 GoSkyHy, All Rights Reserved.</span></div>
+				<div class="col-md-6">
+					<ul class="social-icons">
+						<li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance-square"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest-square"></i></a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<!-- Footer end-->
+</div>
+<!-- Wrapper end-->
+{% endblock wrapper %}
